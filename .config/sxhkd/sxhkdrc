@@ -1,0 +1,10 @@
+# Brightness control
+XF86MonBrightness{Down,Up}
+    xbacklight {-dec,-inc} 10
+
+# Volume control
+XF86AudioMute
+    amixer -q sset Master toggle
+
+XF86Audio{Lower,Raise}Volume
+    amixer -q sset Master 3%{-,+}
