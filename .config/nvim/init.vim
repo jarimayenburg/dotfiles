@@ -28,8 +28,8 @@ set incsearch cindent nocompatible number relativenumber
 " Spaces instead of tabs
 set tabstop=4 shiftwidth=4 expandtab
 
-" Decrease updatetime to 300ms for better user experience
-set updatetime=300
+" Decrease updatetime to 100ms for better user experience
+set updatetime=100
 
 " More natural split opening. Opens splits to the right/bottom, instead of to
 " the left
@@ -43,10 +43,10 @@ colorscheme gruvbox
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 
-" ==== Mappings ====
+" ==== General mappings ====
 nnoremap <Leader><space> :noh<cr>
-nnoremap <C-p> :GFiles<cr>
-nnoremap <C-P> :Files<cr>
+"nnoremap <C-p> :GFiles<cr>
+nnoremap <C-P> :GFiles<cr>
 nnoremap <C-n> :NERDTreeToggle<cr>
 
 " Remap the window switching keys
