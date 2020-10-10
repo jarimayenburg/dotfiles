@@ -11,22 +11,25 @@ Plug 'morhetz/gruvbox'
 Plug 'tmhedberg/matchit'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'ledger/vim-ledger'
+Plug 'tpope/vim-fugitive'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
-" Some basic settings
+" ==== Basic settings ====
 syntax on
 filetype plugin indent on
 set incsearch cindent nocompatible number relativenumber
 
 " Spaces instead of tabs
 set tabstop=4 shiftwidth=4 expandtab
+
+" Decrease updatetime to 300ms for better user experience
+set updatetime=300
 
 " More natural split opening. Opens splits to the right/bottom, instead of to
 " the left
@@ -52,16 +55,70 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" ==== COC ====
+
+" Don't pass messages to |ins-completion-menu|
+set shortmess+=c
+
 " Use <Tab> to trigger autocomplete
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<Tab>" :
-    \ coc#refresh()
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim', 'help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocActionAsync('doHover')
+    endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
+" Add NeoVim's native statusline support.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" ==== Lightline ====
+
+" Add COC status and Git branch to Lightline
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'FugitiveHead',
+  \   'cocstatus': 'coc#status'
+  \ },
+\ }
 
 " YAML-files
 autocmd FileType yaml setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
