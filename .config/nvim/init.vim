@@ -16,6 +16,9 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'ledger/vim-ledger'
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-commentary'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
@@ -30,6 +33,10 @@ set tabstop=4 shiftwidth=4 expandtab
 
 " Decrease updatetime to 100ms for better user experience
 set updatetime=100
+
+" Hide buffers instead of closing them. Prevents the "E37 No write since last
+" change error"
+set hidden
 
 " More natural split opening. Opens splits to the right/bottom, instead of to
 " the left
@@ -55,6 +62,11 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" ==== autocmd's ====
+
+" YAML-files
+autocmd FileType yaml setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
+
 " ==== COC ====
 
 " Don't pass messages to |ins-completion-menu|
@@ -74,7 +86,7 @@ endfunction
 " Use <c-space> to trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
+" Make <CR> \uto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -100,11 +112,20 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 
+" Apply autofix (quickfix)
+nmap <leader>qf <Plug>(coc-fix-current)
+
 " Add NeoVim's native statusline support.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " ==== Lightline ====
 
@@ -120,10 +141,11 @@ let g:lightline = {
   \ },
 \ }
 
-" YAML-files
-autocmd FileType yaml setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
+" ==== VimWiki ====
 
-" == Plugin configuration ==
-
-" Configuration for VimWiki
 let g:vimwiki_list = [{'path': '~/Notes/src', 'path_html': '~/Notes/build', 'syntax': 'markdown', 'ext': '.md'}]
+
+" ==== Fugitive ====
+
+let g:fugitive_gitlab_domains = ['https://gitlab.com']
+let g:gitlab_api_keys = {'gitlab.com': 'fugitive-gitlab.vim'}
