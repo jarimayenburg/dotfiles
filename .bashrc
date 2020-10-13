@@ -40,6 +40,9 @@ export PATH="$PATH:$HOME/Bin"
 export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$PATH:$JAVA_HOME/bin"
 
+# Add Ruby gem bin directory to $PATH
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+
 # FZF
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
