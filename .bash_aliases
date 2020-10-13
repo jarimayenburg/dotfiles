@@ -16,11 +16,10 @@ complete -F __start_kubectl k
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '
 
-# Vim -> Nvim
+# Vim
 alias vim='nvim'
-
-# Open vimrc easily
 alias vimrc='vim ~/.config/nvim/init.vim'
+alias v='vim'
 
 # Dotfiles command
 alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
