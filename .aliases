@@ -2,16 +2,22 @@ alias r='ranger'
 alias xc='xclip -selection clipboard'
 
 # Git aliasses
-alias gs='git status'
-alias ga='git add'
-alias gA='git add -A'
-alias gc='git commit'
-alias gp='git push'
-alias gd='git diff'
+#alias gs='git status'
+#alias ga='git add'
+#alias gA='git add -A'
+#alias gc='git commit'
+#alias gp='git push'
+#alias gd='git diff'
 
-# Kubect
+# Kubectl
 alias k='kubectl'
+alias pk='kubectl --context prd'
 complete -F __start_kubectl k
+complete -F __start_kubectl pk
+
+# Kubeseal
+alias ks='kubeseal'
+alias pks='kubeseal --context prd'
 
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '
@@ -20,6 +26,7 @@ alias sudo='sudo '
 alias vim='nvim'
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias v='vim'
+alias vw='vim -c VimwikiIndex'
 
 # Dotfiles command
 alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
