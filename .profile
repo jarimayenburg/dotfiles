@@ -1,10 +1,5 @@
 alias ls='ls --color=auto'
 
-# Load aliases
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
-
 # Define some XDG variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
