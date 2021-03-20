@@ -12,3 +12,6 @@ XF86Audio{Lower,Raise}Volume
 # Locking the screen
 super + F9
     lockscreen
+
+super + w
+    firefox

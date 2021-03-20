@@ -29,4 +29,4 @@ alias v='vim'
 alias vw='vim -c VimwikiIndex'
 
 # Dotfiles command
-alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+alias config="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
