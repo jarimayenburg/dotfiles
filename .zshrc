@@ -128,3 +128,6 @@ bindkey -v
 # FZF
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+# Z command
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
