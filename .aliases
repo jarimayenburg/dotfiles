@@ -2,9 +2,9 @@ alias r='ranger'
 alias xc='xclip -selection clipboard'
 
 # Git aliasses
-#alias gs='git status'
+alias gs='git status'
 #alias ga='git add'
-#alias gA='git add -A'
+alias gA='git add -A'
 #alias gc='git commit'
 #alias gp='git push'
 #alias gd='git diff'
