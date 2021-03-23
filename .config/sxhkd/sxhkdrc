@@ -13,5 +13,10 @@ XF86Audio{Lower,Raise}Volume
 super + F9
     lockscreen
 
+# Browser
 super + w
     firefox
+
+# Screenshots
+Print
+    maim -s | xclip -selection clipboard -t image/png
