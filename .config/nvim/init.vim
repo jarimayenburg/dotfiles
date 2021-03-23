@@ -4,8 +4,8 @@
 call plug#begin()
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'morhetz/gruvbox'
 Plug 'tmhedberg/matchit'
@@ -16,10 +16,14 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'ledger/vim-ledger'
 Plug 'tpope/vim-fugitive'
-Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-commentary'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'sheerun/vim-polyglot'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 call plug#end()
 
@@ -31,8 +35,8 @@ set incsearch cindent nocompatible number relativenumber
 " Spaces instead of tabs
 set tabstop=4 shiftwidth=4 expandtab
 
-" Decrease updatetime to 100ms for better user experience
-set updatetime=100
+" Decrease updatetime to 50ms for better user experience
+set updatetime=50
 
 " Hide buffers instead of closing them. Prevents the "E37 No write since last
 " change error"
@@ -52,8 +56,6 @@ highlight NonText ctermbg=none
 
 " ==== General mappings ====
 nnoremap <Leader><space> :noh<cr>
-"nnoremap <C-p> :GFiles<cr>
-nnoremap <C-P> :GFiles<cr>
 nnoremap <C-n> :NERDTreeToggle<cr>
 
 " Remap the window switching keys
@@ -105,6 +107,11 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent>[g <Plug>(coc-diagnostic-next)
+nmap <silent>]g <Plug>(coc-diagnostic-prev)
+
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -112,6 +119,13 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply autofix (quickfix)
 nmap <leader>qf <Plug>(coc-fix-current)
 
@@ -126,6 +140,24 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " ==== Lightline ====
 
@@ -145,7 +177,18 @@ let g:lightline = {
 
 let g:vimwiki_list = [{'path': '~/Notes/src', 'path_html': '~/Notes/build', 'syntax': 'markdown', 'ext': '.md'}]
 
-" ==== Fugitive ====
+" ==== Telescope ====
 
-let g:fugitive_gitlab_domains = ['https://gitlab.com']
-let g:gitlab_api_keys = {'gitlab.com': 'fugitive-gitlab.vim'}
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope live_grep<cr>
+
+" ==== Treesitter ====
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
