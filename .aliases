@@ -19,6 +19,9 @@ complete -F __start_kubectl pk
 alias ks='kubeseal'
 alias pks='kubeseal --context prd'
 
+alias h='helm'
+alias ph='helm --kube-context prd'
+
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '
 
