@@ -39,3 +39,5 @@ export HISTCONTROL=ignoredups
 
 # Ignore some commands
 export HISTIGNORE="ls:ps:history"
+
+export GPG_TTY=$(tty)
