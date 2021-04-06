@@ -22,10 +22,14 @@ Plug 'sheerun/vim-polyglot'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 call plug#end()
+
+" ==== Lua modules ====
+lua require("jari")
 
 " ==== Basic settings ====
 syntax on
@@ -64,10 +68,40 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" YAML indentation
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Copy paste stuff
+nnoremap <leader>p "+p
+vnoremap <leader>p "_dP
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+" Delete without putting in register
+nnoremap <leader>d "_g
+vnoremap <leader>d "_g
+
+" Quickfix list navigation
+nnoremap <leader>j :cnext<cr>
+nnoremap <leader>k :cp<cr>
+
+" Visual selection base64 encoding/decoding
+vnoremap <leader>64d c<c-r>=system('base64 --decode', @")<cr><esc>
+vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
+
 " ==== autocmd's ====
 
 " YAML-files
 autocmd FileType yaml setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
+
+" ==== Telescope ====
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
 " ==== COC ====
 
@@ -176,11 +210,6 @@ let g:lightline = {
 " ==== VimWiki ====
 
 let g:vimwiki_list = [{'path': '~/Notes/src', 'path_html': '~/Notes/build', 'syntax': 'markdown', 'ext': '.md'}]
-
-" ==== Telescope ====
-
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>ff <cmd>Telescope live_grep<cr>
 
 " ==== Treesitter ====
 
