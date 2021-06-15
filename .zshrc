@@ -137,3 +137,10 @@ if [ -f '/home/jari/Programs/google-cloud-sdk/path.zsh.inc' ]; then . '/home/jar
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/jari/Programs/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/jari/Programs/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Add ~/.local/bin to PATH
+export PATH="$PATH:$HOME/.local/bin"
+
+# Add Go folders to PATH
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"

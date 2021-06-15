@@ -1,11 +1,12 @@
 {
     "coc.preferences.formatOnSaveFiletypes": [
         "json",
-        "javascript"
+        "javascript",
+        "rust"
     ],
 
     "java.home": "/usr/lib/jvm/default",
     "java.maven.downloadSources": true,
     "java.jdt.ls.vmargs": "-noverify -Xmx1G -javaagent:/home/jari/.config/coc/extensions/coc-java-data/lombok.jar -XX:+UseG1GC -XX:+UseStringDeduplication",
-    "java.saveActions.organizeImports": true,
+    "java.saveActions.organizeImports": false
 }

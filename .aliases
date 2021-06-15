@@ -12,15 +12,19 @@ alias gA='git add -A'
 # Kubectl
 alias k='kubectl'
 alias pk='kubectl --context prd'
+alias gk='kubectl --context gcloud'
 complete -F __start_kubectl k
 complete -F __start_kubectl pk
+complete -F __start_kubectl gk
 
 # Kubeseal
 alias ks='kubeseal'
 alias pks='kubeseal --context prd'
+alias gks='kubeseal --context gcloud --controller-namespace sealed-secrets'
 
 alias h='helm'
 alias ph='helm --kube-context prd'
+alias gch='helm --kube-context gcloud'
 
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '

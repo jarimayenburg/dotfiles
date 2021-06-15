@@ -41,3 +41,4 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="ls:ps:history"
 
 export GPG_TTY=$(tty)
+source "$HOME/.cargo/env"
