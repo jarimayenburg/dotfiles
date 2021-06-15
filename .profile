@@ -42,3 +42,8 @@ export HISTIGNORE="ls:ps:history"
 
 export GPG_TTY=$(tty)
 source "$HOME/.cargo/env"
+
+# Start the X server if we're in a login shell
+if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+    exec startx
+fi
