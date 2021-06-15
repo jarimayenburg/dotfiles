@@ -39,8 +39,8 @@ picom --no-fading-openclose &
 # Start SXHKD
 sxhkd &
 
-# Start the statusbar daemon
-statusbard &
+# Set the statusbar just once. Cron takes over to refresh it every minute
+setstatus
 
 # Start the WM
 exec dwm
