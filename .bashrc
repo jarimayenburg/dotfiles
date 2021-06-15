@@ -19,6 +19,9 @@ bind -m vi-insert 'Control-l: clear-screen'
 # Always expand aliases (also in non-interactive shells)
 shopt -s expand_aliases
 
+# Add aliases
+source ~/.aliases
+
 # FZF
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
