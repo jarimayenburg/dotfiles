@@ -43,9 +43,9 @@ Config {
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
+                             , "--low"      , "red"
+                             , "--normal"   , "orange"
+                             , "--high"     , "#b8bb26"
 
                              , "--" -- battery specific options
                                        -- discharging status
