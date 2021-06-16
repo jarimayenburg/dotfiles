@@ -49,4 +49,5 @@ sxhkd &
 setstatus
 
 # Start the WM
-exec xmonad
+[[ -x $(command -v xmonad) ]] && exec xmonad
+[[ -x $(command -v dwm) ]] && exec dwm
