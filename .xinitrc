@@ -45,6 +45,9 @@ picom --no-fading-openclose &
 # Start SXHKD
 sxhkd &
 
+# Detect the screen configuration
+autorandr --change
+
 # Set the statusbar just once. Cron takes over to refresh it every minute
 setstatus
 

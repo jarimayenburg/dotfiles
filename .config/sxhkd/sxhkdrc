@@ -13,9 +13,9 @@ XF86Audio{Lower,Raise}Volume
 Scroll_Lock
     betterlockscreen -l
 
-# Browser
-super + w
-    firefox
+# Application shortcuts
+super + {w, s}
+    {firefox, slack}
 
 # Screenshots
 Print
