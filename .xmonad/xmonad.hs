@@ -63,7 +63,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["dev", "sys", "www", "chat", "music", "api"] ++ map show [7..8] ++ ["vpn"]
+myWorkspaces    = ["dev", "sys", "www", "chat", "api"] ++ map show [6..7] ++ ["music", "notes"]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..]
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
