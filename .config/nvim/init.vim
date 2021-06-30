@@ -100,7 +100,7 @@ vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
 " ==== autocmd's ====
 
 " YAML-files
-autocmd FileType yaml setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
+autocmd FileType yaml,helm setlocal ts=2 sw=2 sts=2 expandtab indentkeys-=0# indentkeys-=<:>
 
 " ==== Telescope ====
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
@@ -123,6 +123,9 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 " Enable keybindings and completion
 lua << EOF
 local nvim_lsp = require('lspconfig')
+
+-- Enable this for debug logging
+vim.lsp.set_log_level("debug")
 
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
@@ -159,7 +162,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
+local servers = { "pyright", "rust_analyzer", "tsserver", "yamlls", "hls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
@@ -168,10 +171,17 @@ require'lspconfig'.pyright.setup{
     on_attach = on_attach
 }
 
-require'lspconfig'.java_language_server.setup{
-    cmd = {"/home/jari/Programs/java-language-server/dist/lang_server_linux.sh"},
+require'lspconfig'.jdtls.setup{
+    cmd = { "/usr/bin/java", "-Declipse.application=org.eclipse.jdt.ls.core.id1", "-Dosgi.bundles.defaultStartLevel=4", "-Declipse.product=org.eclipse.jdt.ls.core.product", "-Dlog.protocol=true", "-Dlog.level=ALL", "-Xms1g", "-Xmx2G", "-jar", "/home/jari/Programs/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar", "-configuration", "/home/jari/Programs/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux", "-data", "/home/jari/.workspace", "--add-modules=ALL-SYSTEM", "--add-opens java.base/java.util=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED" },
+    cmd_env = {
+      GRADLE_HOME = "/usr/share/gradle-7.1",
+      JAR = "/home/jari/Programs/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar",
+      JDTLS_CONFIG = "/home/jari/Programs/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux",
+      WORKSPACE = "$HOME/.workspace"
+    },
     on_attach = on_attach
 }
+
 EOF
 
 " Enable autocompletion for all buffers
