@@ -14,8 +14,8 @@ Scroll_Lock
     betterlockscreen -l
 
 # Application shortcuts
-super + {w, s, i}
-    {firefox, slack, insomnia}
+super + {w, s, i, c}
+    {firefox, slack, insomnia, cpulimit -l 10 -- ferdi}
 
 # Screenshots
 Print
