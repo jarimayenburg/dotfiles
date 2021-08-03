@@ -3,11 +3,9 @@
 " Plugins
 call plug#begin()
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'tomcur/completion-nvim', {'branch': 'fix-floating-focus'}
+Plug 'mfussenegger/nvim-jdtls'
+Plug 'nvim-lua/completion-nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'morhetz/gruvbox'
 Plug 'tmhedberg/matchit'
@@ -28,6 +26,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jiangmiao/auto-pairs'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
 
 call plug#end()
 
@@ -92,6 +92,16 @@ vnoremap <leader>d "_g
 " Quickfix list navigation
 nnoremap <leader>j :cnext<cr>
 nnoremap <leader>k :cp<cr>
+
+" Yank rest of line
+nnoremap Y y$
+
+" Undo break-points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap [ [<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
 
 " Visual selection base64 encoding/decoding
 vnoremap <leader>64d c<c-r>=system('base64 --decode', @")<cr><esc>
