@@ -10,12 +10,12 @@ XF86Audio{Lower,Raise}Volume
     amixer -q sset Master 3%{-,+}
 
 # Locking the screen
-Scroll_Lock
+super + shift + l
     betterlockscreen -l
 
 # Application shortcuts
-super + {w, s, i}
-    {firefox, slack, insomnia}
+super + {w, s, i, c}
+    {firefox, slack, insomnia, stack}
 
 # Screenshots
 Print
