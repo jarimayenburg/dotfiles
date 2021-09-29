@@ -8,5 +8,4 @@
 ----------------------------------
 
 -- Import the 'jari' Lua module, which imports everything else
-
-require('jari')
+require('jari').setup()

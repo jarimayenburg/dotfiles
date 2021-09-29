@@ -1,14 +1,20 @@
-local g = vim.g
+local M = {}
 
-g.lightline = {
-  active = {
-    left = {
-      { 'mode', 'paste' },
-      { 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' }
+function M.setup()
+  local g = vim.g
+
+  g.lightline = {
+    active = {
+      left = {
+        { 'mode', 'paste' },
+        { 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' }
+      }
+    },
+    component_function = {
+      gitbranch = 'FugitiveHead',
+      cocstatus = 'coc#status'
     }
-  },
-  component_function = {
-    gitbranch = 'FugitiveHead',
-    cocstatus = 'coc#status'
   }
-}
+end
+
+return M

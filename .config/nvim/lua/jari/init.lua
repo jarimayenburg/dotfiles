@@ -2,9 +2,15 @@
 -- My NVIM configuration Lua module
 -------------------------------------
 
-require("jari.basics")
-require("jari.plugins")
-require("jari.lightline")
-require("jari.lsp")
-require("jari.telescope")
-require("jari.treesitter")
+local M = {}
+
+function M.setup()
+  require("jari.basics").setup()
+  require("jari.plugins").setup()
+  require("jari.lightline").setup()
+  require("jari.lsp").setup()
+  require("jari.telescope").setup()
+  require("jari.treesitter").setup()
+end
+
+return M

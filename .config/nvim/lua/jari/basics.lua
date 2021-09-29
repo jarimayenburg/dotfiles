@@ -2,73 +2,79 @@
 -- Basic configuration (options/general keybindings/etc)
 -----------------------------------------------------------
 
-local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
-local opt = vim.opt  -- to set options
+local M = {}
 
-opt.incsearch = true        -- Highlight every match, not just the first
-opt.cindent = true          -- Automatic C program indenting
-opt.number = true           -- Enable line numbers
-opt.relativenumber = true   -- Enable relative line numbers
+function M.setup()
+  local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
+  local opt = vim.opt  -- to set options
 
-opt.tabstop = 4             -- Number of spaces that a <Tab> counts for
-opt.shiftwidth = 4          -- Number of spaces to use for autoindentation
-opt.expandtab = true        -- To use spaces when <Tab> is pressed
+  opt.incsearch = true        -- Highlight every match, not just the first
+  opt.cindent = true          -- Automatic C program indenting
+  opt.number = true           -- Enable line numbers
+  opt.relativenumber = true   -- Enable relative line numbers
 
-opt.updatetime = 50         -- Decrease updatetime to 50ms for better UX
+  opt.tabstop = 4             -- Number of spaces that a <Tab> counts for
+  opt.shiftwidth = 4          -- Number of spaces to use for autoindentation
+  opt.expandtab = true        -- To use spaces when <Tab> is pressed
 
-opt.hidden = true           -- Hide buffers instead of closing them.
+  opt.updatetime = 50         -- Decrease updatetime to 50ms for better UX
 
-opt.termguicolors = true    -- True color support
+  opt.hidden = true           -- Hide buffers instead of closing them.
 
-cmd 'colorscheme gruvbox'   -- Set the color scheme
+  opt.termguicolors = true    -- True color support
 
-opt.splitbelow = true       -- More natural split opening
-opt.splitright = true
+  cmd 'colorscheme gruvbox'   -- Set the color scheme
 
--- Transparency
-cmd 'au VimEnter * highlight Normal ctermbg=none guibg=none'
-cmd 'au VimEnter * highlight NonText ctermbg=none guibg=none'
+  opt.splitbelow = true       -- More natural split opening
+  opt.splitright = true
 
------ Keybindings ------
+  -- Transparency
+  cmd 'au VimEnter * highlight Normal ctermbg=none guibg=none'
+  cmd 'au VimEnter * highlight NonText ctermbg=none guibg=none'
 
-local map = require("jari.utils").map
+  ----- Keybindings ------
 
--- Keybinding helper function
+  local map = require("jari.utils").map
 
--- General mappings
-map('n', '<Leader><space>', ':noh<cr>')
-map('n', '<C-n>', ':NvimTreeToggle<cr>')
+  -- Keybinding helper function
 
--- Remap the window switching keys
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+  -- General mappings
+  map('n', '<Leader><space>', ':noh<cr>')
+  map('n', '<C-n>', ':NvimTreeToggle<cr>')
 
--- Copy paste stuff
-map('n', '<leader>p', '"+p')
-map('v', '<leader>p', '"_dP')
-map('n', '<leader>y', '"+y')
-map('v', '<leader>y', '"+y')
+  -- Remap the window switching keys
+  map('n', '<C-h>', '<C-w>h')
+  map('n', '<C-j>', '<C-w>j')
+  map('n', '<C-k>', '<C-w>k')
+  map('n', '<C-l>', '<C-w>l')
 
--- Delete without putting in register
-map('n', '<leader>d', '"_g')
-map('v', '<leader>d', '"_g')
+  -- Copy paste stuff
+  map('n', '<leader>p', '"+p')
+  map('v', '<leader>p', '"_dP')
+  map('n', '<leader>y', '"+y')
+  map('v', '<leader>y', '"+y')
 
--- Quickfix list navigation
-map('n', '<leader>j', ':cnext<cr>')
-map('n', '<leader>k', ':cp<cr>')
+  -- Delete without putting in register
+  map('n', '<leader>d', '"_g')
+  map('v', '<leader>d', '"_g')
 
--- Yank rest of line
-map('n', 'Y', 'y$')
+  -- Quickfix list navigation
+  map('n', '<leader>j', ':cnext<cr>')
+  map('n', '<leader>k', ':cp<cr>')
 
--- Undo break-points
-map('i', ',', ',<c-g>u')
-map('i', '.', '.<c-g>u')
-map('i', '[', '[<c-g>u')
-map('i', '!', '!<c-g>u')
-map('i', '?', '?<c-g>u')
+  -- Yank rest of line
+  map('n', 'Y', 'y$')
 
--- Visual selection base64 encoding/decoding
-map('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>')
-map('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>')
+  -- Undo break-points
+  map('i', ',', ',<c-g>u')
+  map('i', '.', '.<c-g>u')
+  map('i', '[', '[<c-g>u')
+  map('i', '!', '!<c-g>u')
+  map('i', '?', '?<c-g>u')
+
+  -- Visual selection base64 encoding/decoding
+  map('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>')
+  map('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>')
+end
+
+return M
