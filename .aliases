@@ -31,9 +31,12 @@ alias sudo='sudo '
 
 # Vim
 alias vim='nvim'
-alias vimrc='vim ~/.config/nvim/init.vim'
+alias vimrc='vim ~/.config/nvim'
 alias v='vim'
 alias vw='vim -c VimwikiIndex'
 
 # Dotfiles command
 alias config="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+
+# tmux color prompt
+alias tmux='TERM=screen-256color tmux'
