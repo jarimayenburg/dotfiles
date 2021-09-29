@@ -15,7 +15,7 @@ super + shift + l
 
 # Application shortcuts
 super + {w, s, i, c}
-    {firefox, slack, insomnia, stack}
+    {brave, slack, insomnia, brave --new-window https://ivido.slack.com https://mail.google.com https://calendar.google.com}
 
 # Screenshots
 Print
