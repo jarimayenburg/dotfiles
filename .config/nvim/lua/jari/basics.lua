@@ -37,42 +37,43 @@ function M.setup()
   -- Keybinding helper function
 
   -- General mappings
-  vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>')
-  vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<cr>')
+  local opts = {noremap = true, silent = true}
+  vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>', opts)
+  vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
 
   -- Remap the window switching keys
-  vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h')
-  vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j')
-  vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k')
-  vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l')
+  vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', opts)
+  vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', opts)
+  vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', opts)
+  vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', opts)
 
   -- Copy paste stuff
-  vim.api.nvim_set_keymap('n', '<leader>p', '"+p')
-  vim.api.nvim_set_keymap('v', '<leader>p', '"_dP')
-  vim.api.nvim_set_keymap('n', '<leader>y', '"+y')
-  vim.api.nvim_set_keymap('v', '<leader>y', '"+y')
+  vim.api.nvim_set_keymap('n', '<leader>p', '"+p', opts)
+  vim.api.nvim_set_keymap('v', '<leader>p', '"_dP', opts)
+  vim.api.nvim_set_keymap('n', '<leader>y', '"+y', opts)
+  vim.api.nvim_set_keymap('v', '<leader>y', '"+y', opts)
 
   -- Delete without putting in register
-  vim.api.nvim_set_keymap('n', '<leader>d', '"_g')
-  vim.api.nvim_set_keymap('v', '<leader>d', '"_g')
+  vim.api.nvim_set_keymap('n', '<leader>d', '"_g', opts)
+  vim.api.nvim_set_keymap('v', '<leader>d', '"_g', opts)
 
   -- Quickfix list navigation
-  vim.api.nvim_set_keymap('n', '<leader>j', ':cnext<cr>')
-  vim.api.nvim_set_keymap('n', '<leader>k', ':cp<cr>')
+  vim.api.nvim_set_keymap('n', '<leader>j', ':cnext<cr>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>k', ':cp<cr>', opts)
 
   -- Yank rest of line
-  vim.api.nvim_set_keymap('n', 'Y', 'y$')
+  vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)
 
   -- Undo break-points
-  vim.api.nvim_set_keymap('i', ',', ',<c-g>u')
-  vim.api.nvim_set_keymap('i', '.', '.<c-g>u')
-  vim.api.nvim_set_keymap('i', '[', '[<c-g>u')
-  vim.api.nvim_set_keymap('i', '!', '!<c-g>u')
-  vim.api.nvim_set_keymap('i', '?', '?<c-g>u')
+  vim.api.nvim_set_keymap('i', ',', ',<c-g>u', opts)
+  vim.api.nvim_set_keymap('i', '.', '.<c-g>u', opts)
+  vim.api.nvim_set_keymap('i', '[', '[<c-g>u', opts)
+  vim.api.nvim_set_keymap('i', '!', '!<c-g>u', opts)
+  vim.api.nvim_set_keymap('i', '?', '?<c-g>u', opts)
 
   -- Visual selection base64 encoding/decoding
-  vim.api.nvim_set_keymap('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>')
-  vim.api.nvim_set_keymap('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>')
+  vim.api.nvim_set_keymap('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
+  vim.api.nvim_set_keymap('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>', opts)
 end
 
 return M
