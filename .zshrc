@@ -143,3 +143,5 @@ export PATH="$PATH:$HOME/.local/bin"
 # Add Go folders to PATH
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -30,7 +30,7 @@ function M.setup()
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
-    use 'nvim-telescope/telescope-fzy-native.nvim'
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'editorconfig/editorconfig-vim'
     use 'jiangmiao/auto-pairs'
     use 'weirongxu/plantuml-previewer.vim'

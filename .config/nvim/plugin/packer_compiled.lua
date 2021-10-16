@@ -137,9 +137,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jari/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  ["telescope-fzy-native.nvim"] = {
+  ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/jari/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+    path = "/home/jari/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
