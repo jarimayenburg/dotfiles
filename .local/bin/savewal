@@ -1,0 +1,14 @@
+#! /bin/bash
+#
+# Save the current wallpapers to a directory.
+# Defaults to ~/Pictures/wallpapers
+
+dir=${1:-~/Pictures/wallpapers}
+pics=(~/.cache/randwald/*.jpg)
+pic=$(basename "$pics")
+
+if [[ -f "$dir/$pic" ]]; then
+    notify-send "Wallpaper already exists" "This wallpaper already exists in\n~${dir#$HOME}"
+else
+    cp ~/.cache/randwald/*.jpg "$dir" && notify-send "Wallpaper saved" "The current wallpaper has been saved to\n~${dir#$HOME}"
+fi

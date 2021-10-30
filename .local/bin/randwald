@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+# Sets a random wallpaper from Unsplash.it every x seconds.
+# Defaults to an hour.
+
+echoerr() { echo "$@" >&2; }
+
+wal_dir=~/.cache/randwald
+mkdir -p "$wal_dir"
+
+while true; do
+    rm -rf $wal_dir/*.jpg
+
+    curl -sSL https://unsplash.it/1920/1080/?random > "$wal_dir/cur_wal.jpg"
+
+    hash=$(sha256sum "$wal_dir/cur_wal.jpg" | head -c 10)
+    mv "$wal_dir/cur_wal.jpg" "$wal_dir/$hash.jpg"
+
+    feh --bg-scale --no-xinerama "$wal_dir/$hash.jpg" 
+
+    sleep ${1:-3600} &
+    wait $!
+done
