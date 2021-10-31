@@ -11,7 +11,7 @@ alias gA='git add -A'
 
 # Kubectl
 alias k='kubectl'
-alias pk='kubectl --context prd'
+alias pk='kubectl --context 03926-ivido'
 alias gk='kubectl --context ivido-gcloud'
 complete -F __start_kubectl k
 complete -F __start_kubectl pk
