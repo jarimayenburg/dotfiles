@@ -10,7 +10,7 @@ export VISUAL='nvim'
 export EDITOR="$VISUAL"
 
 # Add ~/Bin to $PATH
-export PATH="$PATH:$HOME/Bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Add Cargo to $PATH
 export PATH="$PATH:$HOME/.cargo/bin"
