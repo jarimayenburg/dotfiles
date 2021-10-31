@@ -9,13 +9,21 @@ XF86AudioMute
 XF86Audio{Lower,Raise}Volume
     amixer -q sset Master 3%{-,+}
 
-# Locking the screen
+# Lock the screen
 super + shift + l
     betterlockscreen -l
 
+# Change the wallpaper
+super + F7
+    pkill randwald; randwald &
+
+# Save the current wallpaper to the 
+super + shift + F7
+    savewal
+
 # Application shortcuts
 super + {w, s, i, c}
-    {brave, slack, insomnia, brave --new-window https://ivido.slack.com https://mail.google.com https://calendar.google.com}
+    {brave, slack, insomnia, slack}
 
 # Screenshots
 Print

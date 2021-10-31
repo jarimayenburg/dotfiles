@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -45,8 +45,14 @@ picom --no-fading-openclose &
 # Start SXHKD
 sxhkd &
 
+# Start random wallpaper daemon
+randwald &
+
 # Detect the screen configuration
 autorandr --change
+
+# Start Dunst
+dunst &
 
 # Set the statusbar just once. Cron takes over to refresh it every minute
 setstatus

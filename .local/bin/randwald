@@ -11,7 +11,7 @@ mkdir -p "$wal_dir"
 while true; do
     rm -rf $wal_dir/*.jpg
 
-    curl -sSL https://unsplash.it/1920/1080/?random > "$wal_dir/cur_wal.jpg"
+    curl -sSL https://source.unsplash.com/random/1920x1080 > "$wal_dir/cur_wal.jpg"
 
     hash=$(sha256sum "$wal_dir/cur_wal.jpg" | head -c 10)
     mv "$wal_dir/cur_wal.jpg" "$wal_dir/$hash.jpg"
