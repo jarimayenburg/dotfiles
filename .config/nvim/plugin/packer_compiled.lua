@@ -89,13 +89,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jari/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
   },
-  ["lightline.vim"] = {
-    loaded = true,
-    path = "/home/jari/.local/share/nvim/site/pack/packer/start/lightline.vim"
-  },
   ["lsp-colors.nvim"] = {
     loaded = true,
     path = "/home/jari/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/jari/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   matchit = {
     loaded = true,
@@ -137,9 +137,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jari/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  ["telescope-fzf-native.nvim"] = {
+  ["telescope-fzy-native.nvim"] = {
     loaded = true,
-    path = "/home/jari/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
+    path = "/home/jari/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

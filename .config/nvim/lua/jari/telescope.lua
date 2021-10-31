@@ -29,7 +29,7 @@ function M.setup()
             }
         },
         extensions = {
-            fzf = {
+            fzy_native = {
                 fuzzy = true,                    -- false will only do exact matching
                 override_generic_sorter = false, -- don't override the generic sorter
                 override_file_sorter = true,     -- override the file sorter
@@ -39,7 +39,7 @@ function M.setup()
         }
     }
 
-    require('telescope').load_extension('fzf')
+    require('telescope').load_extension('fzy_native')
 end
 
 return M
