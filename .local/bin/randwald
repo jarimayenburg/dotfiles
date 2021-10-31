@@ -6,17 +6,14 @@
 echoerr() { echo "$@" >&2; }
 
 wal_dir=~/.cache/randwald
+cur_wal="$wal_dir/cur_wal.jpg"
 mkdir -p "$wal_dir"
 
 while true; do
-    rm -rf $wal_dir/*.jpg
+    rm -rf $cur_wal
 
-    curl -sSL https://source.unsplash.com/random/1920x1080 > "$wal_dir/cur_wal.jpg"
-
-    hash=$(sha256sum "$wal_dir/cur_wal.jpg" | head -c 10)
-    mv "$wal_dir/cur_wal.jpg" "$wal_dir/$hash.jpg"
-
-    feh --bg-scale --no-xinerama "$wal_dir/$hash.jpg" 
+    curl -sSL https://source.unsplash.com/random/1920x1080 > "$cur_wal"
+    feh --bg-scale --no-xinerama "$cur_wal" 
 
     sleep ${1:-3600} &
     wait $!

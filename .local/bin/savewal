@@ -4,11 +4,12 @@
 # Defaults to ~/Pictures/wallpapers
 
 dir=${1:-~/Pictures/wallpapers}
-pics=(~/.cache/randwald/*.jpg)
-pic=$(basename "$pics")
+cur_wal=~/.cache/randwald/cur_wal.jpg
 
-if [[ -f "$dir/$pic" ]]; then
+hash=$(sha256sum "$cur_wal" | head -c 10)
+
+if [[ -f "$dir/$hash.jpg" ]]; then
     notify-send "Wallpaper already saved" "This wallpaper is already saved in\n~${dir#$HOME}"
 else
-    cp ~/.cache/randwald/*.jpg "$dir" && notify-send "Wallpaper saved" "The current wallpaper has been saved to\n~${dir#$HOME}"
+    cp "$cur_wal" "$dir/$hash.jpg" && notify-send "Wallpaper saved" "The current wallpaper has been saved to\n~${dir#$HOME}"
 fi
