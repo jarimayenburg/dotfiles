@@ -1,7 +1,10 @@
 #! /bin/bash
 #
 # Sets a random wallpaper from Unsplash.it every x seconds.
+# If Unsplash is unavailable, we use a wallpaper from ~/Pictures/wallpapers.
 # Defaults to an hour.
+
+set -e
 
 echoerr() { echo "$@" >&2; }
 
@@ -12,8 +15,9 @@ mkdir -p "$wal_dir"
 while true; do
     rm -rf $cur_wal
 
-    curl -sSL https://source.unsplash.com/random/1920x1080 > "$cur_wal"
-    feh --bg-scale --no-xinerama "$cur_wal" 
+    # Either get a random picture from Unsplash or use a stored wallpaper if Unsplash is unavailable
+    curl -sSL https://source.unsplash.com/random/1920x1080 -o "$cur_wal" || cp "$(find ~/Pictures/wallpapers/ -type f | sort -R | head -n 1)" "$cur_wal"
+    feh --bg-fill "$cur_wal" 
 
     sleep ${1:-3600} &
     wait $!
