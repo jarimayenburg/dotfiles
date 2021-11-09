@@ -17,7 +17,7 @@ super + shift + l
 super + F7
     pkill randwald; randwald &
 
-# Save the current wallpaper to the 
+# Save the current wallpaper to the wallpaper folder
 super + shift + F7
     savewal
 
