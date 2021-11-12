@@ -19,11 +19,11 @@ complete -F __start_kubectl gk
 
 # Kubeseal
 alias ks='kubeseal'
-alias pks='kubeseal --context prd'
-alias gks='kubeseal --context gcloud --controller-namespace sealed-secrets'
+alias pks='kubeseal --context 03926-ivido'
+alias gks='kubeseal --context ivido-gcloud --controller-namespace sealed-secrets'
 
 alias h='helm'
-alias ph='helm --kube-context prd'
+alias ph='helm --kube-context 03926-ivido'
 alias gch='helm --kube-context gcloud'
 
 # Fix for sudo not being able to handle aliases
@@ -40,3 +40,6 @@ alias config="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 
 # tmux color prompt
 alias tmux='TERM=screen-256color tmux'
+
+# Set a wallpaper
+alias fehbg='feh --bg-fill'
