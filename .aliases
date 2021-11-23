@@ -13,18 +13,22 @@ alias gA='git add -A'
 alias k='kubectl'
 alias pk='kubectl --context 03926-ivido'
 alias gk='kubectl --context ivido-gcloud'
+alias mk='kubectl --context minikube'
 complete -F __start_kubectl k
 complete -F __start_kubectl pk
 complete -F __start_kubectl gk
+complete -F __start_kubectl mk
 
 # Kubeseal
 alias ks='kubeseal'
 alias pks='kubeseal --context 03926-ivido'
 alias gks='kubeseal --context ivido-gcloud --controller-namespace sealed-secrets'
+alias mks='kubeseal --context minikube'
 
 alias h='helm'
 alias ph='helm --kube-context 03926-ivido'
 alias gch='helm --kube-context gcloud'
+alias mh='helm --kube-context minikube'
 
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '
