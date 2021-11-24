@@ -1,7 +1,7 @@
 Config { 
 
    -- appearance
-     font =         "xft:Source Code Pro:size=12:bold:antialias=true"
+     font =         "xft:Source Code Pro:size=14:bold:antialias=true"
    , bgColor =      "#282828"
    , fgColor =      "#ebdbb2"
    , position =     Top
