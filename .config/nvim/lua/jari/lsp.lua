@@ -3,6 +3,9 @@ local M = {}
 function M.on_attach(_, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
+  -- Setup completion
+  require('completion').on_attach()
+
   -- Enable jdtls commands
   require('jdtls.setup').add_commands()
 
@@ -30,6 +33,8 @@ end
 function M.setup()
   local lsp = require('lspconfig')
 
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
   local cmd = vim.cmd
   local opt = vim.opt
   local g = vim.g
@@ -42,57 +47,69 @@ function M.setup()
   opt.completeopt = "menuone,noinsert,noselect"
   g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
 
-  -- For Java check out ftplugin/java.lua
+  -- Java
+  -- Disabled because it doesn't work with Bazel. Now using JDT.ls in ftplugin.
+  -- local jls_binary = '/home/jari/Programs/java-language-server/dist/lang_server_linux.sh'
+  -- lsp.java_language_server.setup{
+  --   cmd = {jls_binary},
+  --   on_attach = M.on_attach
+  -- }
 
   -- Python
-  lsp.pyright.setup{ on_attach = M.on_attach }
+  lsp.pyright.setup{ on_attach = M.on_attach, capabilities = capabilities }
 
   -- Typescript
-  lsp.tsserver.setup{ on_attach = M.on_attach }
+  lsp.tsserver.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
   -- Rust
-  lsp.rust_analyzer.setup{ on_attach = M.on_attach }
+  lsp.rust_analyzer.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
   -- Haskell
-  lsp.hls.setup{ on_attach = M.on_attach }
+  lsp.hls.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
   -- YAML
-  lsp.yamlls.setup{ on_attach = M.on_attach }
+  lsp.yamlls.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
-  -- Lua
   local sumneko_root_path = '/home/jari/Programs/lua-language-server'
-  local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-  lsp.sumneko_lua.setup {
-      on_attach = M.on_attach,
-      cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-      settings = {
-          Lua = {
-              runtime = {
-                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                  version = 'LuaJIT',
-                  -- Setup your lua path
-                  path = vim.split(package.path, ';'),
-              },
-              diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = {'vim'},
-              },
-              workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = {
-                      [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                      [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                  },
-              },
-          },
+  local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
+
+  local runtime_path = vim.split(package.path, ';')
+  table.insert(runtime_path, "lua/?.lua")
+  table.insert(runtime_path, "lua/?/init.lua")
+
+  require'lspconfig'.sumneko_lua.setup {
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = runtime_path,
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
       },
+    },
   }
 
   -- Bash
-  lsp.bashls.setup{ on_attach = M.on_attach }
+  lsp.bashls.setup{ on_attach = M.on_attach, capabilities = capabilities }
 
   -- PHP
-  lsp.intelephense.setup{}
+  lsp.intelephense.setup{ on_attach = M.on_attach, capabilities = capabilities }
 end
 
 return M

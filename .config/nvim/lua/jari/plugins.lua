@@ -5,39 +5,45 @@
 local M = {}
 
 function M.setup()
-  local cmd = vim.cmd
-
-  cmd 'autocmd BufWritePost plugins.lua source <afile> | PackerCompile'
-
-  return require('packer').startup(function(use)
-    use 'airblade/vim-gitgutter'
-    use 'ap/vim-css-color'
-    use 'editorconfig/editorconfig-vim'
-    use 'folke/lsp-colors.nvim'
-    use 'hoob3rt/lualine.nvim'
-    use 'jiangmiao/auto-pairs'
-    use 'kyazdani42/nvim-tree.lua'
-    use 'kyazdani42/nvim-web-devicons'
-    use 'ledger/vim-ledger'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use 'mfussenegger/nvim-jdtls'
-    use 'morhetz/gruvbox'
-    use 'mustache/vim-mustache-handlebars'
-    use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/completion-nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-telescope/telescope.nvim'
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'sheerun/vim-polyglot'
-    use 'tmhedberg/matchit'
-    use 'tpope/vim-commentary'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-surround'
-    use 'tyru/open-browser.vim'
-    use 'weirongxu/plantuml-previewer.vim'
-    use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
-  end)
+  vim.api.nvim_exec(
+    [[
+    call plug#begin(stdpath('data') . '/plugged')
+      Plug 'L3MON4D3/LuaSnip'
+      Plug 'airblade/vim-gitgutter'
+      Plug 'ap/vim-css-color'
+      Plug 'editorconfig/editorconfig-vim'
+      Plug 'folke/lsp-colors.nvim'
+      Plug 'hoob3rt/lualine.nvim'
+      Plug 'hrsh7th/cmp-buffer'
+      Plug 'hrsh7th/cmp-cmdline'
+      Plug 'hrsh7th/cmp-nvim-lsp'
+      Plug 'hrsh7th/cmp-path'
+      Plug 'hrsh7th/nvim-cmp'
+      Plug 'jiangmiao/auto-pairs'
+      Plug 'kyazdani42/nvim-tree.lua'
+      Plug 'kyazdani42/nvim-web-devicons'
+      Plug 'ledger/vim-ledger'
+      Plug 'lukas-reineke/indent-blankline.nvim'
+      Plug 'mfussenegger/nvim-jdtls'
+      Plug 'morhetz/gruvbox'
+      Plug 'mustache/vim-mustache-handlebars'
+      Plug 'neovim/nvim-lspconfig'
+      Plug 'nvim-lua/plenary.nvim'
+      Plug 'nvim-lua/popup.nvim'
+      Plug 'nvim-telescope/telescope.nvim'
+      Plug 'nvim-treesitter/nvim-treesitter'
+      Plug 'prettier/vim-prettier'
+      Plug 'rafamadriz/friendly-snippets'
+      Plug 'sheerun/vim-polyglot'
+      Plug 'tmhedberg/matchit'
+      Plug 'tpope/vim-commentary'
+      Plug 'tpope/vim-fugitive'
+      Plug 'tpope/vim-surround'
+      Plug 'tyru/open-browser.vim'
+      Plug 'weirongxu/plantuml-previewer.vim'
+      Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
+    call plug#end()
+    ]], false)
 end
 
 return M

@@ -10,6 +10,7 @@ function M.setup()
   require("jari.filetree").setup()
   require("jari.lualine").setup()
   require("jari.lsp").setup()
+  require("jari.cmp").setup()
   require("jari.telescope").setup()
   require("jari.treesitter").setup()
 end

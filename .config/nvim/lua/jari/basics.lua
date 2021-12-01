@@ -30,6 +30,8 @@ function M.setup()
 
   opt.showmode = false        -- Don't show the mode under the status line
 
+  opt.completeopt = 'menu,menuone,noselect'
+
   ----- Keybindings ------
 
   -- General mappings
