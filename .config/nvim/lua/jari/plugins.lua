@@ -30,10 +30,12 @@ function M.setup()
       Plug 'neovim/nvim-lspconfig'
       Plug 'nvim-lua/plenary.nvim'
       Plug 'nvim-lua/popup.nvim'
+      Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
       Plug 'nvim-telescope/telescope.nvim'
       Plug 'nvim-treesitter/nvim-treesitter'
       Plug 'prettier/vim-prettier'
       Plug 'rafamadriz/friendly-snippets'
+      Plug 'ray-x/lsp_signature.nvim'
       Plug 'sheerun/vim-polyglot'
       Plug 'tmhedberg/matchit'
       Plug 'tpope/vim-commentary'
@@ -41,7 +43,6 @@ function M.setup()
       Plug 'tpope/vim-surround'
       Plug 'tyru/open-browser.vim'
       Plug 'weirongxu/plantuml-previewer.vim'
-      Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
     call plug#end()
     ]], false)
 end

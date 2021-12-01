@@ -3,8 +3,8 @@ local M = {}
 function M.on_attach(_, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
-  -- Setup completion
-  require('completion').on_attach()
+  -- LSP signatures as you type
+  require('lsp_signature').on_attach()
 
   -- Enable jdtls commands
   require('jdtls.setup').add_commands()
