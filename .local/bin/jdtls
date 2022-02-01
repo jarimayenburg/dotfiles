@@ -1,6 +1,6 @@
 #! /bin/bash
 
-JDTLS_DIR="$HOME/.local/share/java/jdtls"
+JDTLS_DIR="$HOME/.local/lib/jdtls"
 LOMBOK_JAR="/usr/lib/lombok-common/lombok.jar"
 /usr/bin/java \
   -javaagent:$LOMBOK_JAR \

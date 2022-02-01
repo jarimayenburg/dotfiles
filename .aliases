@@ -47,3 +47,6 @@ alias tmux='TERM=screen-256color tmux'
 
 # Set a wallpaper
 alias fehbg='feh --bg-fill'
+
+# Create a temporary folder and cd into it
+alias tempy='cd $(mktemp -d)'

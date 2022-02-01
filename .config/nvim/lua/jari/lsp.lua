@@ -8,6 +8,12 @@ function M.on_attach(_, bufnr)
 
   -- Enable jdtls commands
   require('jdtls.setup').add_commands()
+  require('jdtls').setup_dap()
+
+  -- Disable LSP for Helm charts (which mess up yamlls)
+  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+    vim.diagnostic.disable() 
+  end
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -23,11 +29,14 @@ function M.on_attach(_, bufnr)
   buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  -- Enable autoformatting for some filetypes
+  vim.cmd 'au BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 100)'
 end
 
 function M.setup()
@@ -49,11 +58,6 @@ function M.setup()
 
   -- Java
   -- Disabled because it doesn't work with Bazel. Now using JDT.ls in ftplugin.
-  -- local jls_binary = '/home/jari/Programs/java-language-server/dist/lang_server_linux.sh'
-  -- lsp.java_language_server.setup{
-  --   cmd = {jls_binary},
-  --   on_attach = M.on_attach
-  -- }
 
   -- Python
   lsp.pyright.setup{ on_attach = M.on_attach, capabilities = capabilities }
@@ -67,6 +71,9 @@ function M.setup()
   -- Haskell
   lsp.hls.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
+  -- Go
+  lsp.gopls.setup{ on_attach = M.on_attach, capabilities = capabilities }
+
   -- YAML
   lsp.yamlls.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
@@ -77,7 +84,7 @@ function M.setup()
   table.insert(runtime_path, "lua/?.lua")
   table.insert(runtime_path, "lua/?/init.lua")
 
-  require'lspconfig'.sumneko_lua.setup {
+  lsp.sumneko_lua.setup {
     on_attach = M.on_attach,
     capabilities = capabilities,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
