@@ -12,13 +12,12 @@ local config = {
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
     'java',
+    '-javaagent:' .. lombok_jar,
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
-    -- '-javaagent:' .. lombok_jar,
-    -- '-Xbootclasspath/a:' .. lombok_jar,
     '-Xms1g',
     '-jar', jdtls_dir .. '/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
     '-configuration', jdtls_dir .. '/config_linux',
