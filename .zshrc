@@ -152,3 +152,6 @@ alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
 # Load NVM
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+
+# Load the .env file, which contains environment variables
+[ -f "$HOME/.env" ] && source "$HOME/.env"
