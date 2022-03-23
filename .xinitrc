@@ -55,8 +55,7 @@ autorandr --change
 dunst &
 
 # Set the statusbar just once. Cron takes over to refresh it every minute
-setstatus
+[[ -x $(command -v setstatus) ]] && setstatus
 
 # Start the WM
-[[ -x $(command -v xmonad) ]] && exec xmonad
 [[ -x $(command -v dwm) ]] && exec dwm
