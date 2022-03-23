@@ -3,6 +3,7 @@ local home = os.getenv('HOME')
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = home .. '/.local/share/jdtls/workspaces/' .. project_name
 local lombok_jar = home .. '/.local/lib/lombok/lombok.jar'
+local bazel_eclipse_home = home .. '/.local/lib/bazel-eclipse'
 
 local jdtls_dir = home .. '/.local/lib/jdtls'
 
@@ -29,13 +30,18 @@ local config = {
 
   autostart = true,
 
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew', 'src'}),
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   -- for a list of options
   settings = {
     java = {
+        import = {
+            bazel = {
+                enabled = true
+            }
+        }
     }
   },
 
@@ -47,7 +53,13 @@ local config = {
   --
   -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
   init_options = {
-    bundles = {}
+    bundles = {
+        bazel_eclipse_home .. '/bundles/com.salesforce.b2eclipse.jdt.ls/target/com.salesforce.b2eclipse.jdt.ls-1.5.1-SNAPSHOT.jar',
+        bazel_eclipse_home .. '/bundles/com.salesforce.bazel.eclipse.common/target/com.salesforce.bazel.eclipse.common-1.5.1-SNAPSHOT.jar',
+        bazel_eclipse_home .. '/bundles/com.salesforce.bazel.eclipse.core/target/com.salesforce.bazel.eclipse.core-1.5.1-SNAPSHOT.jar',
+        bazel_eclipse_home .. '/bundles/com.salesforce.bazel.eclipse.deps/target/com.salesforce.bazel.eclipse.deps-1.5.1-SNAPSHOT.jar',
+        bazel_eclipse_home .. '/bundles/com.salesforce.bazel-java-sdk/target/com.salesforce.bazel-java-sdk-1.5.1-SNAPSHOT.jar',
+    }
   },
 
   on_attach = require('jari.lsp').on_attach,
