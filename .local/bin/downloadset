@@ -1,0 +1,16 @@
+#! /bin/bash
+#
+# Dowwnloads the currently playing set from Youtube
+# and stores it in ~/Music/sets
+
+set -e
+
+dir=~/Music/sets
+
+# Get the URL of the most recently opened YouTube video
+yt_url=$(find ~/.config/BraveSoftware/Brave-Browser/Default/Sessions -type f -name 'Session_*' -exec strings {} \; | grep 'youtube.com/watch?v=' | uniq | tail -n 1)
+
+notify-send "Downloading set..." "Downloading the currently playing set from YouTube"
+youtube-dl --restrict-filenames -q -f "bestaudio" -o "$dir/%(uploader)s/%(title)s.%(ext)s" "$yt_url"
+
+notify-send "Done downloading set!" "The set has finished downloading."
