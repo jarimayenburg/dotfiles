@@ -1,0 +1,56 @@
+#! /bin/bash
+#
+# Daemon that updates the status bar every x seconds.
+
+if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
+    echo "Statusbar daemon is already running. Quiting." 2>&1
+    exit 1
+fi
+
+function wifi() {
+    val=Disconnected
+    netinfo=$(nmcli device status | grep wlan0 | head -n 1)
+
+    if [[ "$(echo $netinfo | awk '{print $3}')" == "connected" ]]; then
+        val="$(echo $netinfo | awk '{print $4}')"
+    fi
+
+
+    echo "WiFi: $val"
+}
+
+function cputemp() {
+    echo "CPU: $(sensors | grep CPU | awk '{print $2}' | sed 's/+//g')"
+}
+
+function batt() {
+    cap=$(cat /sys/class/power_supply/BAT0/capacity)
+    status=$(cat /sys/class/power_supply/BAT0/status)
+
+    label="BAT"
+    if [[ "$status" != "Discharging" ]]; then
+        label="CHG"
+    fi
+
+    # if [[ $status == "Full" ]] || [[ $status == "Not Charging" ]]; then
+    #     cap=100
+    # fi
+
+    echo "$label: $cap%"
+}
+
+function curtime() {
+    date +"%F %R:%S"
+}
+
+function draw() {
+    xsetroot -name "$(wifi) | $(cputemp) | $(batt) | $(curtime)"
+}
+
+trap draw SIGUSR1
+
+while true; do
+    draw
+    sleep ${1:-1} &
+    wait $!
+done
