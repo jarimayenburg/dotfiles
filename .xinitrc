@@ -54,8 +54,8 @@ autorandr --change
 # Start Dunst
 dunst &
 
-# Set the statusbar just once. Cron takes over to refresh it every minute
-[[ -x $(command -v setstatus) ]] && setstatus
+# Start the statusbar daemon
+[[ -x $(command -v statusbard) ]] && statusbard &
 
 # Start the WM
 [[ -x $(command -v dwm) ]] && exec dwm
