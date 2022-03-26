@@ -8,11 +8,12 @@ if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
 fi
 
 function wifi() {
-    val=Disconnected
-    netinfo=$(nmcli device status | grep wlan0 | head -n 1)
+    network="$(iwgetid -r)"
 
-    if [[ "$(echo $netinfo | awk '{print $3}')" == "connected" ]]; then
-        val="$(echo $netinfo | awk '{print $4}')"
+    if [[ $? -eq 0 ]]; then
+        val=$network
+    else
+        val=Disconnected
     fi
 
 
