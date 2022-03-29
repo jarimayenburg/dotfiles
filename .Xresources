@@ -12,45 +12,10 @@ URxvt*scrollTtyOutput:   false
 URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyKeypress: true! Increase maximum lines to be shown in the terminal
 URxvt*saveLines: 20000! ===== Terminal Coloring =====! Default coloring
-!! special
-!*.foreground:   #8ca68c
-!!*.background:   #131513
-!*.background:   #32302f
-!*.cursorColor:  #8ca68c
-!
-!! black
-!*.color0:       #131513
-!*.color8:       #687d68
-!
-!! red
-!*.color1:       #e6193c
-!*.color9:       #e6193c
-!
-!! green
-!*.color2:       #29a329
-!*.color10:      #29a329
-!
-!! yellow
-!*.color3:       #c3c322
-!*.color11:      #c3c322
-!
-!! blue
-!*.color4:       #3d62f5
-!*.color12:      #3d62f5
-!
-!! magenta
-!*.color5:       #ad2bee
-!*.color13:      #ad2bee
-!
-!! cyan
-!*.color6:       #1999b3
-!*.color14:      #1999b3
-!
-!! white
-!*.color7:       #8ca68c
-!*.color15:      #f0fff0! Gruvbox
-! hard contrast: *background: #1d2021
 *background: #282828
+
+Xcursor.size: 16
+
 ! soft contrast: *background: #32302f
 *foreground: #ebdbb2
 ! Black + DarkGrey

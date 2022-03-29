@@ -10,6 +10,7 @@ function M.setup()
     call plug#begin(stdpath('data') . '/plugged')
       Plug 'L3MON4D3/LuaSnip'
       Plug 'airblade/vim-gitgutter'
+      Plug 'andreshazard/vim-freemarker'
       Plug 'ap/vim-css-color'
       Plug 'bazelbuild/vim-bazel'
       Plug 'editorconfig/editorconfig-vim'
@@ -23,13 +24,14 @@ function M.setup()
       Plug 'hrsh7th/nvim-cmp'
       Plug 'jiangmiao/auto-pairs'
       Plug 'kyazdani42/nvim-tree.lua'
-      Plug 'nvim-lua/completion-nvim'
       Plug 'kyazdani42/nvim-web-devicons'
       Plug 'ledger/vim-ledger'
       Plug 'lukas-reineke/indent-blankline.nvim'
       Plug 'mfussenegger/nvim-jdtls'
+      Plug 'morhetz/gruvbox'
       Plug 'mustache/vim-mustache-handlebars'
       Plug 'neovim/nvim-lspconfig'
+      Plug 'nvim-lua/completion-nvim'
       Plug 'nvim-lua/plenary.nvim'
       Plug 'nvim-lua/popup.nvim'
       Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
@@ -46,7 +48,6 @@ function M.setup()
       Plug 'tpope/vim-surround'
       Plug 'tyru/open-browser.vim'
       Plug 'weirongxu/plantuml-previewer.vim'
-      Plug 'morhetz/gruvbox'
     call plug#end()
     ]], false)
 end
