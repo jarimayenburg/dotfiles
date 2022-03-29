@@ -7,16 +7,8 @@ if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
     exit 1
 fi
 
-function vol() {
-    amix=$(amixer sget Master)
-    status="$(awk -F"[][]" '/Front Left:/ { print $4 }' <<< $amix)"
-    level="$(awk -F"[][]" '/Front Left:/ { print $2 }' <<< $amix)"
-
-    if [[ "$status" == "off" ]]; then
-        level="Muted"
-    fi
-
-    echo "Vol: $level"
+function bt() {
+    echo "BT: $(bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done | grep "Connected: yes" | wc -l)"
 }
 
 function wifi() {
@@ -30,6 +22,18 @@ function wifi() {
 
 
     echo "WiFi: $val"
+}
+
+function vol() {
+    amix=$(amixer sget Master)
+    status="$(awk -F"[][]" '/Front Left:/ { print $4 }' <<< $amix)"
+    level="$(awk -F"[][]" '/Front Left:/ { print $2 }' <<< $amix)"
+
+    if [[ "$status" == "off" ]]; then
+        level="Muted"
+    fi
+
+    echo "Vol: $level"
 }
 
 function cputemp() {
@@ -53,7 +57,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
