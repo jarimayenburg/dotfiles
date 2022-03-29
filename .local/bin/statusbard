@@ -7,6 +7,18 @@ if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
     exit 1
 fi
 
+function vol() {
+    amix=$(amixer sget Master)
+    status="$(awk -F"[][]" '/Front Left:/ { print $4 }' <<< $amix)"
+    level="$(awk -F"[][]" '/Front Left:/ { print $2 }' <<< $amix)"
+
+    if [[ "$status" == "off" ]]; then
+        level="Muted"
+    fi
+
+    echo "Vol: $level"
+}
+
 function wifi() {
     network="$(iwgetid -r)"
 
@@ -21,7 +33,7 @@ function wifi() {
 }
 
 function cputemp() {
-    echo "CPU: $(sensors | grep CPU | awk '{print $2}' | sed 's/+//g')"
+    echo "CPU: $(bc <<< "scale=1; $(cat /sys/class/thermal/thermal_zone0/temp)/1000")°"
 }
 
 function batt() {
@@ -33,10 +45,6 @@ function batt() {
         label="CHG"
     fi
 
-    # if [[ $status == "Full" ]] || [[ $status == "Not Charging" ]]; then
-    #     cap=100
-    # fi
-
     echo "$label: $cap%"
 }
 
@@ -45,7 +53,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(wifi) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
