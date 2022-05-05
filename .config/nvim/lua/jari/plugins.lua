@@ -47,6 +47,7 @@ function M.setup()
       Plug 'tpope/vim-fugitive'
       Plug 'tpope/vim-surround'
       Plug 'tyru/open-browser.vim'
+      Plug 'vimwiki/vimwiki'
       Plug 'weirongxu/plantuml-previewer.vim'
     call plug#end()
     ]], false)
