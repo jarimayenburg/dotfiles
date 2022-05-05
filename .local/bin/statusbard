@@ -57,7 +57,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "| $(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
