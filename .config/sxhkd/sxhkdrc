@@ -22,8 +22,8 @@ super + shift + F7
     savewal
 
 # Application shortcuts
-super + {w, s, i, c}
-    {brave, slack, insomnia, slack}
+super + {w, s, c}
+    {brave, slack, slack}
 
 # Screenshots
 Print
