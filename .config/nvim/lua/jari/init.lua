@@ -13,6 +13,7 @@ function M.setup()
   require("jari.cmp").setup()
   require("jari.telescope").setup()
   require("jari.treesitter").setup()
+  require('jari.vimwiki').setup()
 end
 
 return M
