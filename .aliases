@@ -41,6 +41,7 @@ alias vw='vim -c VimwikiIndex'
 
 # Dotfiles command
 alias config="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+alias cfg="config"
 
 # tmux color prompt
 alias tmux='TERM=screen-256color tmux'
