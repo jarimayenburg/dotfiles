@@ -51,7 +51,6 @@ function M.setup()
   -- Auto completion
   cmd 'inoremap <expr> <Tab>   pumvisible() ? "\\<C-n>" : "\\<Tab>"'
   cmd 'inoremap <expr> <S-Tab> pumvisible() ? "\\<C-p>" : "\\<S-Tab>"'
-  cmd "au BufEnter * lua require'completion'.on_attach()"
 
   opt.completeopt = "menuone,noinsert,noselect"
   g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}

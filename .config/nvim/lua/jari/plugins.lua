@@ -31,7 +31,6 @@ function M.setup()
       Plug 'morhetz/gruvbox'
       Plug 'mustache/vim-mustache-handlebars'
       Plug 'neovim/nvim-lspconfig'
-      Plug 'nvim-lua/completion-nvim'
       Plug 'nvim-lua/plenary.nvim'
       Plug 'nvim-lua/popup.nvim'
       Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
