@@ -1,0 +1,9 @@
+#! /bin/bash
+#
+# Sets a random wallpaper from the local wallpapers directory (~/Pictures/wallpapers)
+
+wal_dir=~/Pictures/wallpapers
+
+wal="$(find $wal_dir -type f | sort -R | head -n 1)"
+
+feh --bg-fill "$wal"

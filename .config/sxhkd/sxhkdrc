@@ -21,9 +21,13 @@ super + F7
 super + shift + F7
     savewal
 
+# Set a random local wallpaper permanently
+super + alt + F7
+    pkill randwald; randlocwal
+
 # Application shortcuts
-super + {w, s, c}
-    {brave, slack, slack}
+super + {w, q, s, c}
+    {brave, qutebrowser, slack, slack}
 
 # Screenshots
 Print
