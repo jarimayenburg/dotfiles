@@ -3,13 +3,30 @@
 # Save the current wallpapers to a directory.
 # Defaults to ~/Pictures/wallpapers
 
+delete=false
+while getopts "d" o; do
+    case "${o}" in
+        d)
+            delete=true
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
 dir=${1:-~/Pictures/wallpapers}
 cur_wal=~/.cache/randwald/cur_wal.jpg
 
 hash=$(sha256sum "$cur_wal" | head -c 10)
 
-if [[ -f "$dir/$hash.jpg" ]]; then
-    notify-send "Wallpaper already saved" "This wallpaper is already saved in\n~${dir#$HOME}"
+if [[ "$delete" == "false" ]]; then
+    echo "$dir/$hash.jpg"
+    if [[ -f "$dir/$hash.jpg" ]]; then
+        notify-send "Wallpaper already saved" "This wallpaper is already saved in\n~${dir#$HOME}"
+    else
+        cp "$cur_wal" "$dir/$hash.jpg" && notify-send "Wallpaper saved" "The current wallpaper has been saved to\n~${dir#$HOME}"
+    fi
 else
-    cp "$cur_wal" "$dir/$hash.jpg" && notify-send "Wallpaper saved" "The current wallpaper has been saved to\n~${dir#$HOME}"
+    echo "$dir/$hash.jpg"
+    rm -rf "$dir/$hash.jpg" && notify-send "Wallpaper deleted" "The current wallpaper has been deleted from\n~${dir#$HOME}"
 fi

@@ -21,6 +21,10 @@ super + F7
 super + shift + F7
     savewal
 
+# Delete the current wallpaper from the wallpaper folder
+super + alt + shift + F7
+    savewal -d
+
 # Set a random local wallpaper permanently
 super + alt + F7
     pkill randwald; randlocwal
