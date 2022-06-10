@@ -76,15 +76,6 @@ function M.setup()
   -- Visual selection base64 encoding/decoding
   vim.api.nvim_set_keymap('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
   vim.api.nvim_set_keymap('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>', opts)
-
-  ----- Autocommands -----
-
-  -- Filetype associations
-  cmd 'au BufRead,BufNewFile *.sh.tpl set ft=sh'
-
-  -- Transparency
-  cmd 'au VimEnter * highlight Normal ctermbg=none guibg=none'
-  cmd 'au VimEnter * highlight NonText ctermbg=none guibg=none'
 end
 
 return M

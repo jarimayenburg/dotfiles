@@ -7,6 +7,7 @@ local M = {}
 function M.setup()
   require("jari.plugins").setup()
   require("jari.basics").setup()
+  require("jari.autocmd").setup()
   require("jari.filetree").setup()
   require("jari.lualine").setup()
   require("jari.lsp").setup()
