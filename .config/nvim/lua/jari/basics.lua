@@ -56,11 +56,15 @@ function M.setup()
   vim.api.nvim_set_keymap('v', '<leader>d', '"_g', opts)
 
   -- Quickfix list navigation
-  vim.api.nvim_set_keymap('n', '<leader>j', ':cnext<cr>', opts)
-  vim.api.nvim_set_keymap('n', '<leader>k', ':cp<cr>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>n', ':cnext<cr>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>p', ':cp<cr>', opts)
 
   -- Yank rest of line
   vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)
+
+  -- Center screen on find next
+  vim.api.nvim_set_keymap('n', 'n', 'nzz', opts)
+  vim.api.nvim_set_keymap('n', 'N', 'Nzz', opts)
 
   -- Undo break-points
   vim.api.nvim_set_keymap('i', ',', ',<c-g>u', opts)
