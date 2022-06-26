@@ -37,7 +37,6 @@ function M.setup()
   -- General mappings
   local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>', opts)
-  vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
 
   -- Remap the window switching keys
   vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', opts)

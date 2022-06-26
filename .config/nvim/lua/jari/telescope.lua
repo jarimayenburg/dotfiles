@@ -12,6 +12,9 @@ function M.setup()
     vim.api.nvim_set_keymap('n', '<leader>pb', ":lua require('telescope.builtin').buffers()<CR>", opts)
     vim.api.nvim_set_keymap('n', '<leader>ph', ":lua require('telescope.builtin').help_tags()<CR>", opts)
 
+    -- File browser
+    vim.api.nvim_set_keymap('n', '<C-n>', ':Telescope file_browser<CR>', opts)
+
     -- Telescope configuration
     require('telescope').setup {
         defaults = {
@@ -39,11 +42,18 @@ function M.setup()
                 override_file_sorter = true,     -- override the file sorter
                 case_mode = "ignore_case",       -- or "ignore_case" or "respect_case"
                                                  -- the default case_mode is "smart_case"
-            }
+            },
+
+            file_browser = {
+                theme = "ivy",
+                hijack_netrw = true,
+                path = "%:p:h",
+            },
         }
     }
 
     require('telescope').load_extension('fzy_native')
+    require('telescope').load_extension('file_browser')
 end
 
 return M

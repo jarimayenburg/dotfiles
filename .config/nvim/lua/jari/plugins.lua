@@ -23,7 +23,6 @@ function M.setup()
       Plug 'hrsh7th/cmp-path'
       Plug 'hrsh7th/nvim-cmp'
       Plug 'jiangmiao/auto-pairs'
-      Plug 'kyazdani42/nvim-tree.lua'
       Plug 'kyazdani42/nvim-web-devicons'
       Plug 'ledger/vim-ledger'
       Plug 'lukas-reineke/indent-blankline.nvim'
@@ -35,6 +34,7 @@ function M.setup()
       Plug 'nvim-lua/popup.nvim'
       Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
       Plug 'nvim-telescope/telescope.nvim'
+      Plug 'nvim-telescope/telescope-file-browser.nvim'
       Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
       Plug 'prettier/vim-prettier'
       Plug 'rafamadriz/friendly-snippets'
