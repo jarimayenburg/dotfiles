@@ -35,14 +35,11 @@ function M.setup()
     ----- Keybindings ------
 
     -- Set leader to be space
-    vim.g.mapleader = "<Space>"
+    vim.g.mapleader = " "
 
     -- General mappings
     local opts = {noremap = true, silent = true}
     vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>', opts)
-
-    -- Reload config
-    vim.api.nvim_set_keymap('n', '<leader>r', ':so ~/.config/nvim/init.lua<cr>', opts)
 
     -- Open filetree
     vim.api.nvim_set_keymap('n', '<C-n>', ':Ex<cr>', opts)
