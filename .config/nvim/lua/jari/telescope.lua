@@ -5,15 +5,12 @@ function M.setup()
 
     -- Keybindings
     local opts = {noremap = true, silent = true}
-    vim.api.nvim_set_keymap('n', '<leader>ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>ts', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", opts)
     vim.api.nvim_set_keymap('n', '<C-p>', ":lua require('telescope.builtin').git_files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>pf', ":lua require('telescope.builtin').find_files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>pw', ":lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>pb', ":lua require('telescope.builtin').buffers()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>ph', ":lua require('telescope.builtin').help_tags()<CR>", opts)
-
-    -- File browser
-    vim.api.nvim_set_keymap('n', '<C-n>', ':Telescope file_browser<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>tf', ":lua require('telescope.builtin').find_files()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>tw', ":lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>tb', ":lua require('telescope.builtin').buffers()<CR>", opts)
+    vim.api.nvim_set_keymap('n', '<leader>th', ":lua require('telescope.builtin').help_tags()<CR>", opts)
 
     -- Telescope configuration
     require('telescope').setup {
@@ -43,17 +40,10 @@ function M.setup()
                 case_mode = "ignore_case",       -- or "ignore_case" or "respect_case"
                                                  -- the default case_mode is "smart_case"
             },
-
-            file_browser = {
-                theme = "ivy",
-                hijack_netrw = true,
-                path = "%:p:h",
-            },
         }
     }
 
     require('telescope').load_extension('fzy_native')
-    require('telescope').load_extension('file_browser')
 end
 
 return M
