@@ -44,6 +44,7 @@ function M.setup()
       Plug 'tpope/vim-commentary'
       Plug 'tpope/vim-fugitive'
       Plug 'tpope/vim-surround'
+      Plug 'tpope/vim-vinegar'
       Plug 'tyru/open-browser.vim'
       Plug 'vimwiki/vimwiki'
       Plug 'weirongxu/plantuml-previewer.vim'
