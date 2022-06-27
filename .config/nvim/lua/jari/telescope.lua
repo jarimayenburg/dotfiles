@@ -4,13 +4,13 @@ function M.setup()
     local actions = require('telescope.actions')
 
     -- Keybindings
-    local opts = {noremap = true, silent = true}
-    vim.api.nvim_set_keymap('n', '<leader>ts', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<C-p>', ":lua require('telescope.builtin').git_files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>tf', ":lua require('telescope.builtin').find_files()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>tw', ":lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>tb', ":lua require('telescope.builtin').buffers()<CR>", opts)
-    vim.api.nvim_set_keymap('n', '<leader>th', ":lua require('telescope.builtin').help_tags()<CR>", opts)
+    local opts = {silent = true}
+    vim.keymap.set('n', '<leader>ts', function() require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")}) end, opts)
+    vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, opts)
+    vim.keymap.set('n', '<leader>tf', require('telescope.builtin').find_files, opts)
+    vim.keymap.set('n', '<leader>tw', function() require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") } end, opts)
+    vim.keymap.set('n', '<leader>tb', require('telescope.builtin').buffers, opts)
+    vim.keymap.set('n', '<leader>th', require('telescope.builtin').help_tags, opts)
 
     -- Telescope configuration
     require('telescope').setup {
