@@ -34,9 +34,6 @@ function M.setup()
 
     ----- Keybindings ------
 
-    -- Set leader to be space
-    vim.g.mapleader = " "
-
     -- General mappings
     local opts = {noremap = true, silent = true}
     vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>', opts)
@@ -83,11 +80,21 @@ function M.setup()
     ----- Autocommands -----
 
     -- Filetype associations --
-    vim.cmd 'au BufRead,BufNewFile *.sh.tpl set ft=sh'
+    vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+        pattern = "*.sh.tpl",
+        command = "set ft=sh"
+    })
 
     -- Transparency --
-    vim.cmd 'au VimEnter * highlight Normal ctermbg=none guibg=none'
-    vim.cmd 'au VimEnter * highlight NonText ctermbg=none guibg=none'
+    vim.api.nvim_create_autocmd('VimEnter', {
+        pattern = "*",
+        command = "highlight Normal ctermbg=none guibg=none"
+    })
+
+    vim.api.nvim_create_autocmd('VimEnter', {
+        pattern = "*",
+        command = "highlight NonText ctermbg=none guibg=none"
+    })
 
     -- Run source.organizeImports on save for Golang files
     vim.api.nvim_create_autocmd("BufWritePre", {
