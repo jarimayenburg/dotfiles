@@ -48,16 +48,16 @@ function M.setup()
     vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', opts)
 
     -- Copy paste stuff
-    vim.api.nvim_set_keymap('n', '<leader>p', '"+p', opts)
-    vim.api.nvim_set_keymap('n', '<leader>P', '"+P', opts)
-    vim.api.nvim_set_keymap('v', '<leader>p', '"_dP', opts)
-    vim.api.nvim_set_keymap('n', '<leader>y', '"+y', opts)
-    vim.api.nvim_set_keymap('n', '<leader>Y', '"+y$', opts)
-    vim.api.nvim_set_keymap('v', '<leader>y', '"+y', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>p', '"+p', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>P', '"+P', opts)
+    vim.api.nvim_set_keymap('v', '<Leader>p', '"_dP', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>y', '"+y', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>Y', '"+y$', opts)
+    vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', opts)
 
     -- Delete without putting in register
-    vim.api.nvim_set_keymap('n', '<leader>d', '"_g', opts)
-    vim.api.nvim_set_keymap('v', '<leader>d', '"_g', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>d', '"_g', opts)
+    vim.api.nvim_set_keymap('v', '<Leader>d', '"_g', opts)
 
     -- Yank rest of line
     vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)
@@ -74,8 +74,8 @@ function M.setup()
     vim.api.nvim_set_keymap('i', '?', '?<c-g>u', opts)
 
     -- Visual selection base64 encoding/decoding
-    vim.api.nvim_set_keymap('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
-    vim.api.nvim_set_keymap('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>', opts)
+    vim.api.nvim_set_keymap('v', '<Leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
+    vim.api.nvim_set_keymap('v', '<Leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>', opts)
 
     ----- Autocommands -----
 

@@ -38,6 +38,7 @@ function M.setup()
       Plug 'prettier/vim-prettier'
       Plug 'rafamadriz/friendly-snippets'
       Plug 'ray-x/lsp_signature.nvim'
+      Plug 'rust-lang/rust.vim'
       Plug 'sheerun/vim-polyglot'
       Plug 'tmhedberg/matchit'
       Plug 'towolf/vim-helm'
