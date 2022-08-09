@@ -12,7 +12,7 @@ function M.on_attach(_, bufnr)
 
   -- Disable LSP for Helm charts (which mess up yamlls)
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-    vim.diagnostic.disable() 
+    vim.diagnostic.disable()
   end
 
   -- Mappings.
@@ -35,8 +35,35 @@ function M.on_attach(_, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
+  -- Run source.organizeImports on save for Golang files
+  vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = { "*.go" },
+      callback = function()
+          local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
+          params.context = { only = {"source.organizeImports"} }
+
+          local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+          for _, res in pairs(result or {}) do
+              for _, r in pairs(res.result or {}) do
+                  if r.edit then
+                      vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
+                  else
+                      vim.lsp.buf.execute_command(r.command)
+                  end
+
+                  vim.cmd 'undojoin'
+              end
+          end
+      end,
+  })
+
   -- Enable autoformatting for some filetypes
-  vim.cmd 'au BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 100)'
+  vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = { "*.go" },
+      callback = function ()
+          vim.lsp.buf.formatting_sync(nil, 100)
+      end
+  })
 end
 
 function M.setup()
