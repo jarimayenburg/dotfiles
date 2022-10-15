@@ -92,7 +92,19 @@ function M.setup()
   lsp.tsserver.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
   -- Rust
-  lsp.rust_analyzer.setup{ on_attach = M.on_attach, capabilities = capabilities  }
+  lsp.rust_analyzer.setup{
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          buildScripts = {
+            enable = true
+          }
+        }
+      }
+    }
+  }
 
   -- Haskell
   lsp.hls.setup{ on_attach = M.on_attach, capabilities = capabilities  }

@@ -158,3 +158,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # Haskell ghcup
 [ -f "/home/jari/.ghcup/env" ] && source "/home/jari/.ghcup/env" # ghcup-env
+
+# Kubectl Krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

@@ -51,3 +51,6 @@ alias fehbg='feh --bg-fill'
 
 # Create a temporary folder and cd into it
 alias tempy='cd $(mktemp -d)'
+
+# Todoist
+alias todoist='todoist-cli'
