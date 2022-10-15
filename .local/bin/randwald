@@ -8,16 +8,37 @@ set -e
 
 echoerr() { echo "$@" >&2; }
 
+usage() { echoerr "$0 [-l] <interval>"; }
+
+local=false
+
+while getopts "l" o; do
+    case $o in
+        l)
+            local=true
+            ;;
+        h)
+            usage && exit
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
 wal_dir=~/.cache/randwald
 cur_wal="$wal_dir/cur_wal.jpg"
 mkdir -p "$wal_dir"
 
 while true; do
-    rm -rf $cur_wal
+    if $local; then
+        randlocwal
+    else
+        rm -rf $cur_wal
 
-    # Either get a random picture from Unsplash or use a stored wallpaper if Unsplash is unavailable
-    curl -sSL https://source.unsplash.com/random/1920x1080 -o "$cur_wal" || cp "$(find ~/Pictures/wallpapers/ -type f | sort -R | head -n 1)" "$cur_wal"
-    feh --bg-fill "$cur_wal" 
+        # Either get a random picture from Unsplash or use a stored wallpaper if Unsplash is unavailable
+        curl -sSL https://source.unsplash.com/random/1920x1080 -o "$cur_wal" || cp "$(find ~/Pictures/wallpapers/ -type f | sort -R | head -n 1)" "$cur_wal"
+        feh --bg-fill "$cur_wal"
+    fi
 
     sleep ${1:-3600} &
     wait $!
