@@ -15,7 +15,7 @@ super + shift + l
 
 # Change the wallpaper
 super + F7
-    pkill randwald; randwald &
+    pkill randwald; randwald -l &
 
 # Save the current wallpaper to the wallpaper folder
 super + shift + F7
