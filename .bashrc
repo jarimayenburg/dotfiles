@@ -27,4 +27,3 @@ source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
 source ~/.profile
-source "$HOME/.cargo/env"

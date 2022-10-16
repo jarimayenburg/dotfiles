@@ -41,9 +41,10 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="ls:ps:history"
 
 export GPG_TTY=$(tty)
-source "$HOME/.cargo/env"
 
 export GOPATH="$HOME/.go"
+
+source "$HOME/.cargo/env"
 
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
