@@ -34,6 +34,8 @@ function M.setup()
       Plug 'nvim-lua/popup.nvim'
       Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
       Plug 'nvim-telescope/telescope.nvim'
+      Plug 'nvim-tree/nvim-web-devicons'
+      Plug 'nvim-tree/nvim-tree.lua'
       Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
       Plug 'prettier/vim-prettier'
       Plug 'rafamadriz/friendly-snippets'

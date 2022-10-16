@@ -11,6 +11,7 @@ function M.setup()
   require("jari.lsp").setup()
   require("jari.cmp").setup()
   require("jari.telescope").setup()
+  require("jari.nvimtree").setup()
   require("jari.treesitter").setup()
   require('jari.vimwiki').setup()
 end

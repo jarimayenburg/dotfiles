@@ -34,6 +34,10 @@ function M.setup()
 
   ----- Globals -----
 
+  -- Disable netrw
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
   -- Run rustfmt when a Rust file is saved
   vim.g.rustfmt_autosave = 1
 
@@ -44,7 +48,7 @@ function M.setup()
   vim.api.nvim_set_keymap('n', '<Leader><space>', ':noh<cr>', opts)
 
   -- Open filetree
-  vim.api.nvim_set_keymap('n', '<C-n>', ':Ex<cr>', opts)
+  vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<cr>', opts)
 
   -- Remap the window switching keys
   vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', opts)
