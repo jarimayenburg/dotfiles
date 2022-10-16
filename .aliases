@@ -54,3 +54,6 @@ alias tempy='cd $(mktemp -d)'
 
 # Todoist
 alias todoist='todoist-cli'
+
+# Helix
+alias hx='helix'
