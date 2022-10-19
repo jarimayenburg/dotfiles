@@ -8,7 +8,6 @@ function M.on_attach(_, bufnr)
 
   -- Enable jdtls commands
   require('jdtls.setup').add_commands()
-  require('jdtls').setup_dap()
 
   -- Disable LSP for Helm charts (which mess up yamlls)
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
