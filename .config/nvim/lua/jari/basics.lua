@@ -59,7 +59,7 @@ function M.setup()
   -- Copy paste stuff
   vim.api.nvim_set_keymap('n', '<Leader>p', '"+p', opts)
   vim.api.nvim_set_keymap('n', '<Leader>P', '"+P', opts)
-  vim.api.nvim_set_keymap('v', '<Leader>p', '"_dP', opts)
+  vim.api.nvim_set_keymap('v', '<Leader>p', '"_d"+P', opts)
   vim.api.nvim_set_keymap('n', '<Leader>y', '"+y', opts)
   vim.api.nvim_set_keymap('n', '<Leader>Y', '"+y$', opts)
   vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', opts)
@@ -84,7 +84,7 @@ function M.setup()
 
   -- Visual selection base64 encoding/decoding
   vim.api.nvim_set_keymap('v', '<Leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
-  vim.api.nvim_set_keymap('v', '<Leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>', opts)
+  vim.api.nvim_set_keymap('v', '<Leader>64e', 'c<c-r>=system(\'base64 -w 0\', @")<cr><esc>', opts)
 
   ----- Autocommands -----
 
