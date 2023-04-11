@@ -5,7 +5,7 @@ alias xc='xclip -selection clipboard'
 alias gs='git status'
 #alias ga='git add'
 alias gA='git add -A'
-#alias gc='git commit'
+alias gc='git commit -v --no-verify'
 #alias gp='git push'
 #alias gd='git diff'
 
