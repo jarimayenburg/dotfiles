@@ -29,8 +29,8 @@ function M.on_attach(_, bufnr)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
 
@@ -68,7 +68,7 @@ end
 function M.setup()
   local lsp = require('lspconfig')
 
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   local cmd = vim.cmd
   local opt = vim.opt
@@ -88,7 +88,25 @@ function M.setup()
   lsp.pyright.setup{ on_attach = M.on_attach, capabilities = capabilities }
 
   -- Typescript
-  lsp.tsserver.setup{ on_attach = M.on_attach, capabilities = capabilities  }
+  local function organize_imports()
+    local params = {
+      command = "_typescript.organizeImports",
+      arguments = {vim.api.nvim_buf_get_name(0)},
+      title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+  end
+
+  lsp.tsserver.setup{
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = "Organize imports"
+      }
+    }
+  }
 
   -- Rust
   lsp.rust_analyzer.setup{
@@ -123,24 +141,14 @@ function M.setup()
   -- YAML
   lsp.yamlls.setup{ on_attach = M.on_attach, capabilities = capabilities  }
 
-  local sumneko_root_path = '/home/jari/Programs/lua-language-server'
-  local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
-
-  local runtime_path = vim.split(package.path, ';')
-  table.insert(runtime_path, "lua/?.lua")
-  table.insert(runtime_path, "lua/?/init.lua")
-
-  lsp.sumneko_lua.setup {
+  -- Lua
+  lsp.lua_ls.setup {
     on_attach = M.on_attach,
-    capabilities = capabilities,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     settings = {
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = 'LuaJIT',
-          -- Setup your lua path
-          path = runtime_path,
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
@@ -157,6 +165,7 @@ function M.setup()
       },
     },
   }
+
 
   -- Bash
   lsp.bashls.setup{ on_attach = M.on_attach, capabilities = capabilities }

@@ -13,7 +13,6 @@ function M.setup()
       Plug 'andreshazard/vim-freemarker'
       Plug 'ap/vim-css-color'
       Plug 'bazelbuild/vim-bazel'
-      Plug 'editorconfig/editorconfig-vim'
       Plug 'folke/lsp-colors.nvim'
       Plug 'google/vim-maktaba'
       Plug 'hoob3rt/lualine.nvim'
@@ -34,8 +33,8 @@ function M.setup()
       Plug 'nvim-lua/popup.nvim'
       Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'run': 'make' }
       Plug 'nvim-telescope/telescope.nvim'
-      Plug 'nvim-tree/nvim-web-devicons'
       Plug 'nvim-tree/nvim-tree.lua'
+      Plug 'nvim-tree/nvim-web-devicons'
       Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
       Plug 'prettier/vim-prettier'
       Plug 'rafamadriz/friendly-snippets'
