@@ -46,6 +46,8 @@ export GOPATH="$HOME/.go"
 
 source "$HOME/.cargo/env"
 
+export PATH="$PATH:$(yarn global bin)"
+
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     exec startx

@@ -113,6 +113,8 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+autoload -U compinit && compinit
+
 # Load aliases
 if [ -f ~/.aliases ]; then
     . ~/.aliases
@@ -145,8 +147,6 @@ export PATH="$PATH:$HOME/.local/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
 
 # Load NVM
@@ -161,3 +161,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # Kubectl Krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:/home/jari/.nsccli/bin"
