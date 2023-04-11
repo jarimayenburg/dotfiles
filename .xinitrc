@@ -46,7 +46,7 @@ picom --no-fading-openclose &
 sxhkd &
 
 # Start random wallpaper daemon
-randwald -l &
+#randwald -l &
 
 # Detect the screen configuration
 autorandr --change
