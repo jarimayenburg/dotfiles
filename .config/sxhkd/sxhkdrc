@@ -33,6 +33,10 @@ super + alt + F7
 super + {w, q, s, c}
     {brave, qutebrowser, slack, slack}
 
+# Brave incognito window
+super + shift + w
+    {brave --incognito}
+
 # Screenshots
 Print
     maim -s | xclip -selection clipboard -t image/png

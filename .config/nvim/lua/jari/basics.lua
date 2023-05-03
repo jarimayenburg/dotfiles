@@ -86,11 +86,20 @@ function M.setup()
   vim.api.nvim_set_keymap('v', '<Leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>', opts)
   vim.api.nvim_set_keymap('v', '<Leader>64e', 'c<c-r>=system(\'base64 -w 0\', @")<cr><esc>', opts)
 
+  -- Go to next and previous in quickfix list
+  vim.api.nvim_set_keymap('n', 'gn', ':cn<cr>zz', opts)
+  vim.api.nvim_set_keymap('n', 'gp', ':cp<cr>zz', opts)
+
   ----- Autocommands -----
 
   -- Filetype associations --
   vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
     pattern = "*.sh.tpl",
+    command = "set ft=sh"
+  })
+
+  vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+    pattern = "*.env.*",
     command = "set ft=sh"
   })
 

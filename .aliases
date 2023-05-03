@@ -6,6 +6,7 @@ alias gs='git status'
 #alias ga='git add'
 alias gA='git add -A'
 alias gc='git commit -v --no-verify'
+alias gP='git pull'
 #alias gp='git push'
 #alias gd='git diff'
 
@@ -35,7 +36,7 @@ alias sudo='sudo '
 
 # Vim
 alias vim='nvim'
-alias vimrc='vim ~/.config/nvim'
+alias vimrc='cd ~/.config/nvim && vim'
 alias v='vim'
 alias vw='vim -c VimwikiIndex'
 
