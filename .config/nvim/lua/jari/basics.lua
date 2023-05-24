@@ -63,10 +63,9 @@ function M.setup()
   vim.api.nvim_set_keymap('n', '<Leader>y', '"+y', opts)
   vim.api.nvim_set_keymap('n', '<Leader>Y', '"+y$', opts)
   vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', opts)
-
-  -- Delete without putting in register
-  vim.api.nvim_set_keymap('n', '<Leader>d', '"_g', opts)
-  vim.api.nvim_set_keymap('v', '<Leader>d', '"_g', opts)
+  vim.api.nvim_set_keymap('n', '<Leader>d', '"+d', opts)
+  vim.api.nvim_set_keymap('n', '<Leader>D', '"+d$', opts)
+  vim.api.nvim_set_keymap('v', '<Leader>d', '"+d', opts)
 
   -- Yank rest of line
   vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)

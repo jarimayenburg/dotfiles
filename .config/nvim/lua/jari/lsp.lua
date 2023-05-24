@@ -1,3 +1,4 @@
+local util = require "jari.util"
 local M = {}
 
 function M.on_attach(_, bufnr)
@@ -97,6 +98,11 @@ function M.setup()
     vim.lsp.buf.execute_command(params)
   end
 
+  -- Filters out react types
+  local function filter_unwanted_types(value)
+    return string.match(value.uri, 'react/index.d.ts') == nil
+  end
+
   lsp.tsserver.setup{
     on_attach = M.on_attach,
     capabilities = capabilities,
@@ -105,6 +111,16 @@ function M.setup()
         organize_imports,
         description = "Organize imports"
       }
+    },
+    handlers = {
+      ['textDocument/definition'] = function (err, result, method, ...)
+        if vim.tbl_islist(result) and #result > 1 then
+          local filtered_result = util.filter(result, filter_unwanted_types)
+          return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+        end
+
+        vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+      end
     }
   }
 
