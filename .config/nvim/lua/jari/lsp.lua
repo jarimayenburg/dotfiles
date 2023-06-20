@@ -61,7 +61,7 @@ function M.on_attach(_, bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = { "*.go" },
       callback = function ()
-          vim.lsp.buf.formatting_sync(nil, 100)
+          vim.lsp.buf.format({async = false})
       end
   })
 end
