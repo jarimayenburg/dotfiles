@@ -71,6 +71,9 @@ function M.setup()
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+  -- Disable LSP snippets because they clog the autocomplete and I don't use them
+  capabilities.textDocument.completion.completionItem.snippetSupport = false
+
   local cmd = vim.cmd
   local opt = vim.opt
   local g = vim.g
