@@ -21,7 +21,6 @@ function M.setup()
       Plug 'hrsh7th/cmp-nvim-lsp'
       Plug 'hrsh7th/cmp-path'
       Plug 'hrsh7th/nvim-cmp'
-      Plug 'jiangmiao/auto-pairs'
       Plug 'kyazdani42/nvim-web-devicons'
       Plug 'ledger/vim-ledger'
       Plug 'lukas-reineke/indent-blankline.nvim'
@@ -50,8 +49,13 @@ function M.setup()
       Plug 'tyru/open-browser.vim'
       Plug 'vimwiki/vimwiki'
       Plug 'weirongxu/plantuml-previewer.vim'
+      Plug 'windwp/nvim-autopairs'
+      Plug 'windwp/nvim-ts-autotag'
     call plug#end()
     ]], false)
+
+    -- Setup basic plugins
+    require("nvim-autopairs").setup {}
 end
 
 return M
