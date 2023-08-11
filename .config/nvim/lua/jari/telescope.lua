@@ -3,6 +3,17 @@ local M = {}
 function M.setup()
     local actions = require('telescope.actions')
 
+    local config = require('telescope.config')
+
+    local vimgrep_arguments = { unpack(config.values.vimgrep_arguments) }
+
+    -- I want to search hidden/dot files
+    table.insert(vimgrep_arguments, "--hidden")
+
+    -- I don't want to search in the .git directory
+    table.insert(vimgrep_arguments, "--glob")
+    table.insert(vimgrep_arguments, "!**/.git/*")
+
     -- Keybindings
     local opts = {silent = true}
     vim.keymap.set('n', '<leader>ts', function() require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")}) end, opts)
@@ -21,6 +32,8 @@ function M.setup()
             grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
             qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
+            vimgrep_arguments = vimgrep_arguments,
+
             mappings = {
                 i = {
                     ["<C-x>"] = false,
@@ -30,6 +43,11 @@ function M.setup()
 
             preview = {
                 treesitter = false
+            }
+        },
+        pickers = {
+            find_files = {
+                find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
             }
         },
         extensions = {
