@@ -191,6 +191,9 @@ function M.setup()
 
   -- PHP
   lsp.intelephense.setup{ on_attach = M.on_attach, capabilities = capabilities }
+
+  -- Starlark
+  lsp.starlark_rust.setup{ on_attach = M.on_attach, capabilities = capabilities }
 end
 
 return M
