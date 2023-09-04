@@ -25,6 +25,9 @@ export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 # .NET Core
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+# Node module binaries
+export PATH="$PATH:node_modules/.bin"
+
 # === Improvements to history file ===
 
 # Increase Bash history file size
