@@ -25,7 +25,7 @@ function M.setup()
     vim.keymap.set('n', '>',     api.node.navigate.sibling.next,        opts('Next Sibling'))
     vim.keymap.set('n', '<',     api.node.navigate.sibling.prev,        opts('Previous Sibling'))
     vim.keymap.set('n', '.',     api.node.run.cmd,                      opts('Run Command'))
-    vim.keymap.set('n', '-',     api.tree.change_root_to_parent,        opts('Up'))
+    vim.keymap.set('n', '-',     '<Nop>') -- Disabled cause it's annoying
     vim.keymap.set('n', 'a',     api.fs.create,                         opts('Create'))
     vim.keymap.set('n', 'bmv',   api.marks.bulk.move,                   opts('Move Bookmarked'))
     vim.keymap.set('n', 'B',     api.tree.toggle_no_buffer_filter,      opts('Toggle No Buffer'))
