@@ -149,9 +149,14 @@ export PATH="$PATH:$GOPATH/bin"
 
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
 
-# Load NVM
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+# Lazy load NVM
+export NVM_DIR="/usr/share/nvm"
+if [ -s "$NVM_DIR/init-nvm.sh" ]; then
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && npm'
+fi
 
 # Load the .env file, which contains environment variables
 [ -f "$HOME/.env" ] && source "$HOME/.env"
