@@ -26,7 +26,7 @@ return {
           telemetry = { enable = false },
         },
       },
-      rust_analyzer = {
+      ["rust_analyzer@2023-09-11"] = {
         imports = {
           granularity = {
             group = "module"
