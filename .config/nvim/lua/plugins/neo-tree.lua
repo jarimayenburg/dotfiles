@@ -56,7 +56,8 @@ return {
       },
       filtered_items = {
         show_hidden_count = false
-      }
-    },
+      },
+      group_empty_dirs = true,
+    }
   }
 }
