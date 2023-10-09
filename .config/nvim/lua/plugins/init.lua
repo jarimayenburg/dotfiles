@@ -92,5 +92,24 @@ return {
       -- Run rustfmt when a Rust file is saved
       vim.g.rustfmt_autosave = 1
     end
+  },
+
+  -- PlantUML support
+  {
+    'weirongxu/plantuml-previewer.vim',
+    dependencies = {
+      'aklt/plantuml-syntax',
+      'tyru/open-browser.vim',
+    }
+  },
+
+  -- Surround selections
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = "VeryLazy",
+    config = function ()
+      require('nvim-surround').setup()
+    end
   }
 }
