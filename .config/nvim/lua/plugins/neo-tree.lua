@@ -1,6 +1,7 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
+  lazy = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
@@ -52,12 +53,13 @@ return {
           ["on"] = false,
           ["os"] = false,
           ["ot"] = false,
-        }
+        },
       },
       filtered_items = {
         show_hidden_count = false
       },
       group_empty_dirs = true,
+      hijack_netrw_behavior = "open_current",
     }
   }
 }
