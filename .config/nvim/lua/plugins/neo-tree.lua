@@ -35,7 +35,9 @@ return {
       mappings = {
         ["S"] = false,
         ["s"] = "split_with_window_picker",
-        ["<C-s>"] = "vsplit_with_window_picker",
+        ["<C-s>"] = "split_with_window_picker",
+        ["x"] = "split_with_window_picker",
+        ["<C-x>"] = "split_with_window_picker",
         ["v"] = "vsplit_with_window_picker",
         ["<C-v>"] = "vsplit_with_window_picker",
       }
