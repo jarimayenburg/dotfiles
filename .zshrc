@@ -150,12 +150,12 @@ export PATH="$PATH:$GOPATH/bin"
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
 
 # Lazy load NVM
-export NVM_DIR="/usr/share/nvm"
-if [ -s "$NVM_DIR/init-nvm.sh" ]; then
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  alias nvm='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && nvm'
-  alias node='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && node'
-  alias npm='unalias nvm node npm && . "$NVM_DIR"/init-nvm.sh && npm'
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
 fi
 
 # Load the .env file, which contains environment variables

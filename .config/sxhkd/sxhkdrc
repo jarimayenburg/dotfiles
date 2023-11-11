@@ -31,11 +31,15 @@ super + alt + F7
 
 # Application shortcuts
 super + {w, q, s, c}
-    {brave, qutebrowser, slack, slack}
+    {firefox, qutebrowser, slack, slack}
+
+# Tmux sessionizer
+super + o
+    st tms
 
 # Brave incognito window
 super + shift + w
-    {brave --incognito}
+    {firefox --private-window}
 
 # Screenshots
 Print
