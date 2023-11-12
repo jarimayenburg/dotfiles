@@ -137,33 +137,5 @@ source /usr/share/fzf/completion.zsh
 export CLOUDSDK_PYTHON=python2
 if [ -f '/home/jari/Programs/google-cloud-sdk/path.zsh.inc' ]; then . '/home/jari/Programs/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
+# The next line enables ZSH command completion for gcloud.
 if [ -f '/home/jari/Programs/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/jari/Programs/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Add ~/.local/bin to PATH
-export PATH="$PATH:$HOME/.local/bin"
-
-# Add Go folders to PATH
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-
-alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
-
-# Lazy load NVM
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-fi
-
-# Load the .env file, which contains environment variables
-[ -f "$HOME/.env" ] && source "$HOME/.env"
-
-# Haskell ghcup
-[ -f "/home/jari/.ghcup/env" ] && source "/home/jari/.ghcup/env" # ghcup-env
-
-# Kubectl Krew
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$PATH:/home/jari/.nsccli/bin"

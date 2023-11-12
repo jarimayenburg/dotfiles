@@ -51,6 +51,31 @@ source "$HOME/.cargo/env"
 
 export PATH="$PATH:$(yarn global bin)"
 
+# Add ~/.local/bin to PATH
+export PATH="$PATH:$HOME/.local/bin"
+
+# Add Go folders to PATH
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Lazy load NVM
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+fi
+
+# Load the .env file, which contains environment variables
+[ -f "$HOME/.env" ] && source "$HOME/.env"
+
+# Haskell ghcup
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+# Kubectl Krew
+export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
+
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     exec startx
