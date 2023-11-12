@@ -36,7 +36,7 @@ alias sudo='sudo '
 
 # Vim
 alias vim='nvim'
-alias vimrc='cd ~/.config/nvim && vim .'
+alias vimrc='tmux new-session -c ~/.config/nvim -s nvimrc nvim .'
 alias v='vim'
 alias vw='vim -c VimwikiIndex'
 
