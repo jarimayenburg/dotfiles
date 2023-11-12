@@ -17,6 +17,9 @@ return {
 
     -- Java language server (JDT.ls) extensions
     'mfussenegger/nvim-jdtls',
+
+    -- Signature hints on functions, structs, etc.
+    { 'ray-x/lsp_signature.nvim', event = "VeryLazy" }
   },
   config = function()
     -- Setup neovim lua configuration
@@ -45,5 +48,10 @@ return {
         jdtls = function () end
       }
     }
+
+    -- Set up LSP signatures
+    require('lsp_signature').setup({
+      toggle_key = '<C-s>',
+    })
   end
 }
