@@ -19,44 +19,16 @@ return {
     'mfussenegger/nvim-jdtls',
   },
   config = function()
-    local servers = {
-      lua_ls = {
-        Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
-        },
-      },
-      ["rust_analyzer@2023-09-11"] = {
-        imports = {
-          granularity = {
-            group = "module"
-          },
-          prefix = "self"
-        },
-        cargo = {
-          buildScripts = {
-            enable = true
-          }
-        },
-        procMacro = {
-          enable = true
-        },
-      },
-      jdtls = {},
-      tsserver = {},
-      gopls = {},
-      pyright = {},
-      intelephense = {},
-    }
-
     -- Setup neovim lua configuration
     require('neodev').setup()
 
     -- Ensure the servers above are installed
     local mason_lspconfig = require 'mason-lspconfig'
 
+    local lsp_config = require('config.lsp')
+
     mason_lspconfig.setup {
-      ensure_installed = vim.tbl_keys(servers),
+      ensure_installed = vim.tbl_keys(lsp_config.servers),
     }
 
     mason_lspconfig.setup_handlers {
@@ -67,10 +39,10 @@ return {
         end
 
         require('lspconfig')[server_name].setup {
-          capabilities = require('config.lsp').capabilities,
-          on_attach = require('config.lsp').on_attach,
-          settings = servers[server_name],
-          filetypes = (servers[server_name] or {}).filetypes,
+          capabilities = lsp_config.capabilities,
+          on_attach = lsp_config.on_attach,
+          settings = lsp_config.servers[server_name],
+          filetypes = (lsp_config.servers[server_name] or {}).filetypes,
         }
       end
     }
