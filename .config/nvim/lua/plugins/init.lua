@@ -111,5 +111,18 @@ return {
     config = function ()
       require('nvim-surround').setup()
     end
+  },
+
+  -- File symbols outline
+  {
+    'simrat39/symbols-outline.nvim',
+    keys = {
+      { "<c-m>", "<cmd>SymbolsOutline<cr>" }
+    },
+    config = function ()
+      require('symbols-outline').setup {
+        auto_close = true
+      }
+    end
   }
 }
