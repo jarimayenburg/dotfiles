@@ -24,26 +24,33 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local servers = {
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-  ["rust_analyzer@2023-09-11"] = {
-    imports = {
-      granularity = {
-        group = "module"
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
       },
-      prefix = "self"
-    },
-    cargo = {
-      buildScripts = {
-        enable = true
+    }
+  },
+  rust_analyzer = {
+    cmd = { "ra-multiplex" },
+    settings = {
+      ["rust-analyzer"] = {
+        imports = {
+          granularity = {
+            group = "module"
+          },
+          prefix = "self"
+        },
+        cargo = {
+          buildScripts = {
+            enable = true
+          }
+        },
+        procMacro = {
+          enable = true
+        },
       }
-    },
-    procMacro = {
-      enable = true
-    },
+    }
   },
   jdtls = {},
   tsserver = {},
