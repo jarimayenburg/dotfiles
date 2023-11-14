@@ -17,7 +17,7 @@ function wifi() {
     if [[ $? -eq 0 ]]; then
         val=$network
     else
-        val=Disconnected
+        val="Disconnected"
     fi
 
 
@@ -30,14 +30,24 @@ function vol() {
     level="$(awk -F"[][]" '/Front Left:/ { print $2 }' <<< $amix)"
 
     if [[ "$status" == "off" ]]; then
-        level="Muted"
+        level="Muted"
     fi
 
     echo "Vol: $level"
 }
 
 function cputemp() {
-    echo "CPU: $(bc <<< "scale=1; $(cat /sys/class/thermal/thermal_zone0/temp)/1000")°"
+    temp="$(bc <<< "$(cat /sys/class/thermal/thermal_zone0/temp)/1000")"
+
+    if [[ "$temp" -ge "85" ]]; then
+        color=""
+    elif [[ "$temp" -ge "95" ]]; then
+        color=""
+    else
+        color=""
+    fi
+
+    echo "CPU: $color$temp°C"
 }
 
 function batt() {
@@ -49,7 +59,15 @@ function batt() {
         label="CHG"
     fi
 
-    echo "$label: $cap%"
+    if [[ "$cap" -le "5" ]]; then
+        color=""
+    elif [[ "$cap" -le "20" ]]; then
+        color=""
+    else
+        color=""
+    fi
+
+    echo "$label: $color$cap%"
 }
 
 function curtime() {
@@ -57,7 +75,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "| $(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
