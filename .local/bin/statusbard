@@ -40,9 +40,7 @@ function memusage() {
     read total free <<< $(grep -E 'MemTotal|MemFree' /proc/meminfo | awk '{printf "%.1f ", $2 / 1048576}')
 
     perc="$(echo "scale=4;$free / $total * 100" | bc)"
-    if [[ "${perc%.*}" -ge "80" ]]; then
-        color=""
-    elif [[ "${perc%.*}" -ge "95" ]]; then
+    if [[ "${perc%.*}" -ge "90" ]]; then
         color=""
     else
         color=""
@@ -59,8 +57,6 @@ function cpuload() {
         load="$(cat $file)"
 
         if [[ "${load%.*}" -ge "95" ]]; then
-            color=""
-        elif [[ "${load%.*}" -ge "80" ]]; then
             color=""
         else
             color=""
