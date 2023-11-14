@@ -139,3 +139,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
   pattern = "*",
   command = "highlight NonText ctermbg=none guibg=none"
 })
+
+-- Restart some daemons when their script changes
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = vim.fn.expand('$HOME/.local/bin/statusbard'),
+  callback = function () os.execute("pkill statusbard; statusbard >/dev/null 2>&1 &") end
+})
