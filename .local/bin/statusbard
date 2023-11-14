@@ -36,18 +36,40 @@ function vol() {
     echo "Vol: $level"
 }
 
+function cpuload() {
+    file="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadmond/load"
+
+    # Check of cpuloadmond is running and the load file exists
+    if pidof -x cpuloadmond > /dev/null && [[ -f "$file" ]]; then
+        load="$(cat $file)"
+
+        if [[ "${load%.*}" -ge "95" ]]; then
+            color=""
+        elif [[ "${load%.*}" -ge "80" ]]; then
+            color=""
+        else
+            color=""
+        fi
+
+        printf "CPU: $color%5s%%" $load
+    else
+        echo "CPU: N/A"
+    fi
+
+}
+
 function cputemp() {
     temp="$(bc <<< "$(cat /sys/class/thermal/thermal_zone0/temp)/1000")"
 
-    if [[ "$temp" -ge "85" ]]; then
-        color=""
-    elif [[ "$temp" -ge "95" ]]; then
+    if [[ "$temp" -ge "95" ]]; then
         color=""
+    elif [[ "$temp" -ge "85" ]]; then
+        color=""
     else
         color=""
     fi
 
-    echo "CPU: $color$temp°C"
+    echo "Temp: $color$temp°C"
 }
 
 function batt() {
@@ -75,7 +97,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cpuload) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
