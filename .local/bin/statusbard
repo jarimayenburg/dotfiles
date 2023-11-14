@@ -36,6 +36,21 @@ function vol() {
     echo "Vol: $level"
 }
 
+function memusage() {
+    read total free <<< $(grep -E 'MemTotal|MemFree' /proc/meminfo | awk '{printf "%.1f ", $2 / 1048576}')
+
+    perc="$(echo "scale=4;$free / $total * 100" | bc)"
+    if [[ "${perc%.*}" -ge "80" ]]; then
+        color=""
+    elif [[ "${perc%.*}" -ge "95" ]]; then
+        color=""
+    else
+        color=""
+    fi
+
+    echo "RAM: $color${free}/${total} GB"
+}
+
 function cpuload() {
     file="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadmond/load"
 
@@ -97,7 +112,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(cpuload) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuload) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
