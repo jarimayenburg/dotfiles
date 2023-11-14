@@ -1,0 +1,6 @@
+#! /bin/bash
+
+# Start DWM in a loop to allow for easy restarts
+while true; do
+    dwm >/dev/null 2>&1
+done

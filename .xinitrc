@@ -58,4 +58,4 @@ dunst &
 [[ -x $(command -v statusbard) ]] && statusbard &
 
 # Start the WM
-[[ -x $(command -v dwm) ]] && exec dwm
+[[ -x $(command -v startdwm) ]] && exec startdwm
