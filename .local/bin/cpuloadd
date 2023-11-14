@@ -2,12 +2,12 @@
 #
 # Continuously calculates current CPU usage and writes it to a file
 
-if [[ "$(pgrep cpuloadmond | wc -l)" -gt "2" ]]; then
-    echo "cpuloadmond is already running. Quiting." 2>&1
+if [[ "$(pgrep cpuloadd | wc -l)" -gt "2" ]]; then
+    echo "cpuloadd is already running. Quiting." 2>&1
     exit 1
 fi
 
-dir="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadmond"
+dir="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadd"
 varsfile="$dir/vars"
 loadfile="$dir/load"
 interval=0.5
@@ -27,5 +27,9 @@ while true; do
     read u1 t1 < $varsfile
     read u2 t2 <<< "$(calcvars | tee "$varsfile")"
 
-    echo "scale=2; ($u2-$u1) * 100 / ($t2-$t1)" | bc | awk '{printf "%.2f", $1}' > $loadfile
+    (
+        flock 200 || exit 1
+
+        echo "scale=2; ($u2-$u1) * 100 / ($t2-$t1)" | bc | awk '{printf "%.2f", $1}' > $loadfile
+    ) 200<>$loadfile
 done

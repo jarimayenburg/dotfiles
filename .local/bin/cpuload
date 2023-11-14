@@ -1,0 +1,13 @@
+#! /bin/bash
+#
+# Get current CPU load percentage
+
+dir="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadd"
+loadfile="$dir/load"
+
+if ! pidof -x cpuloadd >/dev/null; then
+    echo "error: cpuloadd not running"
+    exit 1
+fi
+
+flock -s "$loadfile" -c "cat '$loadfile'"

@@ -49,13 +49,8 @@ function memusage() {
     echo "RAM: $color${free}/${total} GB"
 }
 
-function cpuload() {
-    file="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadmond/load"
-
-    # Check of cpuloadmond is running and the load file exists
-    if pidof -x cpuloadmond > /dev/null && [[ -f "$file" ]]; then
-        load="$(cat $file)"
-
+function cpuusage() {
+    if load="$(cpuload)"; then
         if [[ "${load%.*}" -ge "95" ]]; then
             color=""
         else
@@ -66,7 +61,6 @@ function cpuload() {
     else
         echo "CPU: N/A"
     fi
-
 }
 
 function cputemp() {
@@ -108,7 +102,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuload) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuusage) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
