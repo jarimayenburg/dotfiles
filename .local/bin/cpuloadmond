@@ -1,0 +1,26 @@
+#! /bin/bash
+#
+# Continuously calculates current CPU usage and writes it to a file
+
+dir="${XDG_DATA_HOME:-$HOME/.local/share}/cpuloadmond"
+varsfile="$dir/vars"
+loadfile="$dir/load"
+interval=0.5
+
+mkdir -p $dir
+
+function calcvars() {
+    grep 'cpu ' /proc/stat | awk '{print $2+$4 " " $2+$4+$5}'
+}
+
+# Bootstrap the load file with current values
+calcvars > $varsfile
+
+while true; do
+    sleep $interval
+
+    read u1 t1 < $varsfile
+    read u2 t2 <<< "$(calcvars | tee "$varsfile")"
+
+    echo "scale=2; ($u2-$u1) * 100 / ($t2-$t1)" | bc > $loadfile
+done
