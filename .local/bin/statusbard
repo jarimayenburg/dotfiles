@@ -37,8 +37,8 @@ function vol() {
 }
 
 function memusage() {
-    read total free <<< $(grep -E 'MemTotal|MemFree' /proc/meminfo | awk '{printf "%.1f ", $2 / 1048576}')
-    used="$(echo "scale=1; $total - $free" | bc)"
+    read total available <<< $(grep -E 'MemTotal|MemAvailable' /proc/meminfo | awk '{printf "%.1f ", $2 / 1048576}')
+    used="$(echo "scale=1; $total - $available" | bc)"
 
     perc="$(echo "scale=4;$used / $total * 100" | bc)"
     if [[ "${perc%.*}" -ge "90" ]]; then
