@@ -38,15 +38,16 @@ function vol() {
 
 function memusage() {
     read total free <<< $(grep -E 'MemTotal|MemFree' /proc/meminfo | awk '{printf "%.1f ", $2 / 1048576}')
+    used="$(echo "scale=1; $total - $free" | bc)"
 
-    perc="$(echo "scale=4;$free / $total * 100" | bc)"
+    perc="$(echo "scale=4;$used / $total * 100" | bc)"
     if [[ "${perc%.*}" -ge "90" ]]; then
         color=""
     else
         color=""
     fi
 
-    echo "RAM: $color${free}/${total} GB"
+    echo "RAM: $color${used}/${total} GB"
 }
 
 function cpuusage() {
