@@ -74,9 +74,6 @@ local opts = { noremap = true, silent = true }
 -- Remove highlightes
 vim.keymap.set('n', '<leader><space>', ':noh<cr>', opts)
 
--- Open netrw
-vim.keymap.set('n', '-', vim.cmd.Ex, opts)
-
 -- Remap the window switching keys
 vim.keymap.set('n', '<C-h>', '<C-w>h', opts)
 vim.keymap.set('n', '<C-j>', '<C-w>j', opts)
