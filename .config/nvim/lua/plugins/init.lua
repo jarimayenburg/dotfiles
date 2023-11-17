@@ -124,5 +124,7 @@ return {
         auto_close = true
       }
     end
-  }
+  },
+
+  'towolf/vim-helm',
 }
