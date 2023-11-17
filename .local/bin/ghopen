@@ -1,0 +1,5 @@
+#! /bin/bash
+#
+# Open a Github repository in the browser
+
+(cd ~/Repos && find . -mindepth 1 -maxdepth 2 -type d -printf '%P\n' | dmenu | xargs -I {} xdg-open https://github.com/\{\})

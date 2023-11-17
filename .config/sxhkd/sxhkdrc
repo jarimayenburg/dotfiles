@@ -30,8 +30,8 @@ super + alt + F7
     pkill randwald; randlocwal
 
 # Application shortcuts
-super + {w, q, s, c}
-    {chromium, qutebrowser, slack, slack}
+super + {w, q, s, c, g}
+    {chromium, qutebrowser, slack, slack, ghopen}
 
 # Tmux sessionizer
 super + o
