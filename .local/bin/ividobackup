@@ -3,8 +3,8 @@
 # Compress and encrypt the Ivido folder and store it in the TransIP VPS.
 # Encrpts with GPG key of Jari Maijenburg <jari.maijenburg@formelio.nl>
 #
-# Schedule hourly, daily and weekly by CRON tasks using anacron using
-# the jobs found at /etc/cron.{hourly,daily,weekly}.
+# Schedule daily and weekly by CRON tasks using anacron using
+# the jobs found at /etc/cron.{daily,weekly}.
 
 set -e
 
