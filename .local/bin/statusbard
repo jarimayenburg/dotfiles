@@ -47,7 +47,7 @@ function memusage() {
         color=""
     fi
 
-    echo "RAM: $color${used}/${total} GB"
+    printf "RAM: $color%.2f/%.2f GB" $used $total
 }
 
 function cpuusage() {
