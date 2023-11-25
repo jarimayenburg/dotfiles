@@ -134,7 +134,6 @@ source /usr/share/fzf/completion.zsh
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # The next line updates PATH for the Google Cloud SDK.
-export CLOUDSDK_PYTHON=python2
 if [ -f '/home/jari/Programs/google-cloud-sdk/path.zsh.inc' ]; then . '/home/jari/Programs/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables ZSH command completion for gcloud.
