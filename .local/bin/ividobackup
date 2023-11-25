@@ -13,7 +13,7 @@ fullpath="~/laptop_backups/$filename.tar.gz.gpg"
 
 notify-send -u low 'Ivido folder backup started' 'Backing up ~/Ivido to vps.ivido.nl...'
 
-if tar czf - --strip-components=2 $HOME/Ivido | gpg --encrypt -r jari.maijenburg@formelio.nl | ssh jari@vps.ivido.nl "mkdir -p $(dirname $fullpath) && cat > $fullpath"; then
+if tar -C $HOME -czf - ./Ivido | gpg --encrypt -r jari.maijenburg@formelio.nl | ssh jari@vps.ivido.nl "mkdir -p $(dirname $fullpath) && cat > $fullpath"; then
     notify-send -u normal 'Ivido folder backup succeeded!' 'Successfully uploaded backup of ~/Ivido to vps.ivido.nl'
 else
     notify-send -u critical 'Ivido folder backup failed' 'Failed uploading ~/Ivido backup to vps.ivido.nl'
