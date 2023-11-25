@@ -27,7 +27,7 @@ super + alt + shift + F7
 
 # Set a random local wallpaper permanently
 super + alt + F7
-    pkill randwald; randlocwal
+    pkill randwald; randwal -l
 
 # Application shortcuts
 super + {w, q, s, c, g}

@@ -1,0 +1,37 @@
+#! /bin/bash
+#
+# Sets a random wallpaper from the local wallpapers directory (~/Pictures/wallpapers)
+
+set -e
+
+echoerr() { echo "$@" >&2; }
+
+usage() { echoerr "$0 [-l]"; }
+
+local=false
+while getopts "l" o; do
+    case $o in
+        l)
+            local=true
+            ;;
+        h)
+            usage && exit
+            ;;
+    esac
+done
+
+wal_dir=~/Pictures/wallpapers
+cur_wal=~/.cache/randwald/cur_wal.jpg
+mkdir -p $(dirname $cur_wal)
+
+function random_local() {
+    find $wal_dir -type f | sort -R | head -n 1
+}
+
+if $local; then
+    cp "$(random_local)" $cur_wal
+else
+    curl -sSL -o $cur_wal https://source.unsplash.com/random/1920x1080 || cp "$(random_local)" $cur_wal
+fi
+
+feh --bg-fill $cur_wal
