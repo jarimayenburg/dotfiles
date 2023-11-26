@@ -38,7 +38,6 @@ local servers = {
     }
   },
   rust_analyzer = {
-    cmd = { "ra-multiplex" },
     settings = {
       ["rust-analyzer"] = {
         imports = {
