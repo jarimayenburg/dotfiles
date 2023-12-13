@@ -1,0 +1,14 @@
+[Unit]
+Description=Statusbar daemon
+After=network.target
+
+[Service]
+Type=simple
+Environment="PATH=/home/jari/.local/bin:/usr/lib/ccache/bin:/usr/local/bin:/usr/bin:/bin"
+Environment=DISPLAY=:0
+ExecStart=/home/jari/.local/bin/statusbard
+StartLimitInterval=0
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

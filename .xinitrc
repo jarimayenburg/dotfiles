@@ -57,8 +57,5 @@ dunst &
 # Start the CPU load monitoring daemon
 [[ -x $(command -v cpuloadd) ]] && cpuloadd &
 
-# Start the statusbar daemon
-[[ -x $(command -v statusbard) ]] && statusbard &
-
 # Start the WM
 [[ -x $(command -v startdwm) ]] && exec startdwm
