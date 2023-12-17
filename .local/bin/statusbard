@@ -110,6 +110,6 @@ trap draw SIGUSR1
 
 while true; do
     draw
-    sleep ${1:-1} &
+    sleep ${0.5:-1} &
     wait $!
 done
