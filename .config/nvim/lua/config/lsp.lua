@@ -17,7 +17,7 @@ local function on_attach(_, bufnr)
   map('n', '<leader>q', vim.diagnostic.setloclist)
   map('n', '<leader>f', vim.lsp.buf.format)
   map('n', '<leader>h', function() vim.lsp.inlay_hint(bufnr) end)
-  map('i', '<c-h>', function() vim.lsp.inlay_hint(bufnr) end)
+  -- map('i', '<c-h>', function() vim.lsp.inlay_hint(bufnr) end)
 
   map('n', '<leader>li', ':LspInfo<cr>')
   map('n', '<leader>ll', ':LspLog<cr>')
