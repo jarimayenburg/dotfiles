@@ -8,8 +8,7 @@ if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
 fi
 
 function bt() {
-    echo "BT: 0"
-    # echo "BT: $(bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done | grep "Connected: yes" | wc -l)"
+    echo "BT: $(bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done | grep "Connected: yes" | wc -l)"
 }
 
 function wifi() {
