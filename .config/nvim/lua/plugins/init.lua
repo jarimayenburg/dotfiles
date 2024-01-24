@@ -127,4 +127,6 @@ return {
   },
 
   'towolf/vim-helm',
+
+  'AndrewRadev/splitjoin.vim',
 }
