@@ -99,7 +99,7 @@ function batt() {
 }
 
 function curtime() {
-    date +"%F %R:%S"
+    date +"%a %F %R:%S"
 }
 
 function draw() {
