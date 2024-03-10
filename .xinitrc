@@ -57,5 +57,8 @@ dunst &
 # Start the CPU load monitoring daemon
 [[ -x $(command -v cpuloadd) ]] && cpuloadd &
 
+# Start a daemon that listens to systemd lock events and runs betterlockscreen
+[[ -x $(command -v xss-lock) ]] && xss-lock -- betterlockscreen -l &
+
 # Start the WM
 [[ -x $(command -v startdwm) ]] && exec startdwm

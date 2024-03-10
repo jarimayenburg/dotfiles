@@ -56,7 +56,7 @@ vim.opt.showmode = false
 vim.opt.signcolumn = 'yes'
 
 -- Case-insensitive searching UNLESS \C or capital in search
-vim.opt.ignorecase = true
+vim.opt.ignorecase = false
 vim.opt.smartcase = true
 
 -- Set autocompletion menu to also show if there is only one option

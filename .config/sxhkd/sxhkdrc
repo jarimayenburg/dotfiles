@@ -31,7 +31,7 @@ super + alt + F7
 
 # Application shortcuts
 super + {w, q, s, c, g}
-    {chromium, qutebrowser, slack, slack, ghopen}
+    {firefox, qutebrowser, slack, slack, ghopen}
 
 # Tmux sessionizer
 super + o
@@ -39,7 +39,7 @@ super + o
 
 # Incognito browser window
 super + shift + w
-    {chromium --incognito}
+    {firefox --private-window}
 
 # Screenshots
 Print
