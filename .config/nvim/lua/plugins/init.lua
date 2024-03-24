@@ -125,4 +125,7 @@ return {
       silent = true,
     }
   },
+
+  -- nvim integration for bacon (background Rust code checker)
+  'Canop/nvim-bacon',
 }
