@@ -3,9 +3,6 @@ return {
   'hrsh7th/nvim-cmp',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
@@ -15,11 +12,6 @@ return {
     local cmp = require('cmp')
 
     cmp.setup {
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body)
-        end,
-      },
       mapping = {
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -36,7 +28,6 @@ return {
       },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
       }, {
           { name = 'buffer' },
         })

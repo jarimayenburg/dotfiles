@@ -113,20 +113,16 @@ return {
     end
   },
 
-  -- File symbols outline
-  {
-    'simrat39/symbols-outline.nvim',
-    keys = {
-      { "<c-m>", "<cmd>SymbolsOutline<cr>" }
-    },
-    config = function ()
-      require('symbols-outline').setup {
-        auto_close = true
-      }
-    end
-  },
-
   'towolf/vim-helm',
 
-  'AndrewRadev/splitjoin.vim',
+  -- For secure local configuration files (i.e. .nvim.lua, .nvimrc, .execrc)
+  {
+    'klen/nvim-config-local',
+    opts = {
+      -- Lookup config files in parent directories
+      lookup_parents = true,
+
+      silent = true,
+    }
+  },
 }

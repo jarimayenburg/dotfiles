@@ -17,7 +17,6 @@ local function on_attach(_, bufnr)
   map('n', '<leader>q', vim.diagnostic.setloclist)
   map('n', '<leader>f', vim.lsp.buf.format)
   map('n', '<leader>h', function() vim.lsp.inlay_hint(bufnr) end)
-  -- map('i', '<c-h>', function() vim.lsp.inlay_hint(bufnr) end)
 
   map('n', '<leader>li', ':LspInfo<cr>')
   map('n', '<leader>ll', ':LspLog<cr>')
@@ -32,12 +31,19 @@ local servers = {
   lua_ls = {
     settings = {
       Lua = {
-        workspace = { checkThirdParty = false },
+        workspace = {
+          checkThirdParty = false,
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
         telemetry = { enable = false },
       },
     }
   },
   rust_analyzer = {
+    tag = "nightly",
     settings = {
       ["rust-analyzer"] = {
         imports = {
@@ -52,20 +58,94 @@ local servers = {
           }
         },
         procMacro = {
-          enable = true
-        },
+          enable = true,
+        }
       }
     }
   },
-  jdtls = {},
+  jdtls = {
+    autostart = true,
+    settings = {
+        java = {
+            signatureHelp = { enabled = true },
+            jdt = {
+                ls = {
+                    lombokSupport = {
+                        enabled = true
+                    }
+                }
+            }
+        },
+    },
+    -- jdtls is loaded through ftplugin instead
+    setup = function(server)
+      local jdtls = require('jdtls')
+
+      local lombok_jar = vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"
+      local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
+
+      local root_markers = { ".gradle", "gradlew", ".git" }
+      local root_dir = jdtls.setup.find_root(root_markers)
+      local home = os.getenv("HOME")
+      local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+      local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
+
+      server.cmd = {
+        jdtls_bin,
+        "--jvm-arg=-javaagent:" .. lombok_jar,
+        "-data", workspace_dir,
+      }
+
+      server = vim.tbl_deep_extend("keep", server, {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      jdtls.start_or_attach(server)
+    end,
+  },
   tsserver = {},
   gopls = {},
   pyright = {},
   intelephense = {},
 }
 
-return {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  servers = servers,
-}
+local M = {}
+
+-- List of the names and optionally tags (versions) of all configured servers
+---@type string[]
+M.servers = {}
+for name, server in pairs(servers) do
+  if server.tag then
+    name = name .. "@" .. server.tag
+  end
+
+  table.insert(M.servers, name)
+end
+
+-- Set up a server using `lspconfig`. Will do nothing if the server has `no_lspconfig` set
+M.setup_server = function(server_name, config)
+  local server = servers[server_name] or {}
+
+  server = vim.tbl_deep_extend("force", server, config or {});
+
+  local setup = server.setup
+
+  -- Remove our own keys that shouldn't be passed on to lspconfig
+  server.setup = nil
+  server.tag = nil
+
+  -- If the server has a setup override, use that instead
+  if setup then
+    return setup(server)
+  end
+
+  server = vim.tbl_deep_extend("keep", server, {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
+
+  require('lspconfig')[server_name].setup(server)
+end
+
+return M

@@ -1,9 +1,2 @@
-local jdtls_config = require('config.jdtls').setup()
+require('config.lsp').setup_server("jdtls")
 
-local pkg_status, jdtls = pcall(require, "jdtls")
-if not pkg_status then
-  vim.notify("unable to load nvim-jdtls", vim.log.levels.ERROR)
-  return
-end
-
-jdtls.start_or_attach(jdtls_config)
