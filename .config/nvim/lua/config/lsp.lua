@@ -123,7 +123,8 @@ for name, server in pairs(servers) do
   table.insert(M.servers, name)
 end
 
--- Set up a server using `lspconfig`. Will do nothing if the server has `no_lspconfig` set
+-- Set up a server using `lspconfig` or the server's own `setup` function if it's
+-- configured with one
 M.setup_server = function(server_name, config)
   local server = servers[server_name] or {}
 
