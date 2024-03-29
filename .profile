@@ -20,7 +20,7 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$PATH:$JAVA_HOME/bin"
 
 # Add Ruby gem bin directory to $PATH
-export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 # .NET Core
 export PATH="$PATH:$HOME/.dotnet/tools"
