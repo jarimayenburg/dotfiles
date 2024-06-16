@@ -1,0 +1,22 @@
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[merge]
+	tool = fugitive
+[commit]
+	gpgsign = true
+[push]
+	autoSetupRemote = true
+[core]
+	autocrlf = input
+
+# Include the personal configuration by default
+[include]
+    path = ~/.gitconfig.personal
+
+# Include the work configuration for any Formelio repo
+[includeIf "gitdir:~/Repos/formelio/"]
+    path = ~/.gitconfig.work
