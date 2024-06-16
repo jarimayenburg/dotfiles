@@ -104,9 +104,9 @@ local servers = {
       jdtls.start_or_attach(server)
     end,
   },
-  tsserver = {},
   gopls = {},
   pyright = {},
+  tsserver = {},
   intelephense = {},
 }
 
