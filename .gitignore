@@ -1,2 +1,4 @@
 .dotfiles.git
 .config/nvim/plugged
+.local/share
+.local/state
