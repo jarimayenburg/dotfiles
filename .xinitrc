@@ -54,6 +54,9 @@ autorandr --change
 # Start Dunst
 dunst &
 
+# Start the statusbar daemon
+statusbard &
+
 # Start the CPU load monitoring daemon
 [[ -x $(command -v cpuloadd) ]] && cpuloadd &
 
