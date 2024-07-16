@@ -54,6 +54,9 @@ autorandr --change
 # Start Dunst
 dunst &
 
+# Start the USB automounter
+udiskie &
+
 # Start the statusbar daemon
 while true; do
     statusbard
