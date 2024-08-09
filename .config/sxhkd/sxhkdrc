@@ -30,8 +30,8 @@ super + alt + F7
     pkill randwald; randwal -l
 
 # Application shortcuts
-super + {w, q, c, g, n}
-    {firefox, qutebrowser, slack --disable-gpu, ghopen, insomnia --disable-gpu}
+super + {w, q, c, g, n, e}
+    {firefox, qutebrowser, slack --disable-gpu, ghopen, insomnia --disable-gpu, thunar}
 
 # Tmux sessionizer
 super + o

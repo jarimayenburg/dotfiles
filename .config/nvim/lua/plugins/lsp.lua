@@ -23,7 +23,9 @@ return {
   },
   config = function()
     require('neodev').setup()
-    require('mason').setup()
+    require('mason').setup {
+      PATH = "append"
+    }
 
     local mason_lspconfig = require 'mason-lspconfig'
 

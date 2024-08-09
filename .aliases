@@ -13,12 +13,10 @@ alias gP='git pull'
 # Kubectl
 alias k='kubectl'
 alias pk='kubectl --context 03926-ivido'
-alias gk='kubectl --context ivido-gcloud'
-alias mk='kubectl --context minikube'
+alias tk='kubectl --context transip-dev'
 complete -F __start_kubectl k
 complete -F __start_kubectl pk
-complete -F __start_kubectl gk
-complete -F __start_kubectl mk
+complete -F __start_kubectl tk
 
 # Kubeseal
 alias ks='kubeseal'
@@ -28,8 +26,7 @@ alias mks='kubeseal --context minikube'
 
 alias h='helm'
 alias ph='helm --kube-context 03926-ivido'
-alias gch='helm --kube-context gcloud'
-alias mh='helm --kube-context minikube'
+alias th='helm --kube-context transip-dev'
 
 # Fix for sudo not being able to handle aliases
 alias sudo='sudo '

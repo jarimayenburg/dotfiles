@@ -57,6 +57,9 @@ dunst &
 # Start the USB automounter
 udiskie &
 
+# Start Thunar in the background
+thunar --daemon &
+
 # Start the statusbar daemon
 while true; do
     statusbard
