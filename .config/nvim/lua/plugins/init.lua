@@ -94,6 +94,17 @@ return {
     end
   },
 
+  -- D2 UML support
+  'terrastruct/d2-vim',
+
+  -- Inline UML rendering
+  {
+    'scrooloose/vim-slumlord',
+    dependencies = {
+      'aklt/plantuml-syntax'
+    }
+  },
+
   -- PlantUML support
   {
     'weirongxu/plantuml-previewer.vim',

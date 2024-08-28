@@ -31,7 +31,7 @@ super + alt + F7
 
 # Application shortcuts
 super + {w, q, c, g, n, e}
-    {firefox, qutebrowser, slack --disable-gpu, ghopen, insomnia --disable-gpu, thunar}
+    {firefox, qutebrowser, slack, ghopen, insomnia, thunar}
 
 # Tmux sessionizer
 super + o

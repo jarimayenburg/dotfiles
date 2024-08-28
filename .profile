@@ -76,6 +76,9 @@ export NVM_DIR="$HOME/.nvm"
 # Kubectl Krew
 export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
+# Structurizr site generatr
+export PATH="$PATH:/opt/structurizr-site-generatr/bin"
+
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     exec startx

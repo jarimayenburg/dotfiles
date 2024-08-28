@@ -57,3 +57,5 @@ alias todoist='todoist-cli'
 alias hx='helix'
 
 alias screenfetch='neofetch'
+
+alias mutt='neomutt'
