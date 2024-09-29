@@ -7,6 +7,12 @@ if [[ "$(pgrep statusbard | wc -l)" -gt "2" ]]; then
     exit 1
 fi
 
+function music() {
+    if playerctl -s status >/dev/null; then
+        echo "$(playerctl metadata xesam:artist) - $(playerctl metadata xesam:title)"
+    fi
+}
+
 function bt() {
     echo "BT: $(bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done | grep "Connected: yes" | wc -l)"
 }
@@ -103,7 +109,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuusage) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(music) | $(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuusage) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
