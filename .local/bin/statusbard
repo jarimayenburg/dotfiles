@@ -13,10 +13,6 @@ function music() {
     fi
 }
 
-function bt() {
-    echo "BT: $(bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done | grep "Connected: yes" | wc -l)"
-}
-
 function wifi() {
     network="$(iwgetid -r)"
 
@@ -27,7 +23,7 @@ function wifi() {
     fi
 
 
-    echo "WiFi: $val"
+    echo "W $val"
 }
 
 function vol() {
@@ -39,7 +35,7 @@ function vol() {
         level="Muted"
     fi
 
-    echo "Vol: $level"
+    echo "V $level"
 }
 
 function memusage() {
@@ -53,10 +49,10 @@ function memusage() {
         color=""
     fi
 
-    printf "RAM: $color%.2f/%.2f GB" $used $total
+    printf "R $color%.2f GB" $used
 }
 
-function cpuusage() {
+function cputemp() {
     if load="$(cpuload)"; then
         if [[ "${load%.*}" -ge "95" ]]; then
             color=""
@@ -64,13 +60,9 @@ function cpuusage() {
             color=""
         fi
 
-        printf "CPU: $color%5s%%" $load
-    else
-        echo "CPU: N/A"
+        load="$(printf "$color%5s%%" $load)"
     fi
-}
 
-function cputemp() {
     temp="$(bc <<< "$(cat /sys/class/thermal/thermal_zone0/temp)/1000")"
 
     if [[ "$temp" -ge "95" ]]; then
@@ -81,16 +73,18 @@ function cputemp() {
         color=""
     fi
 
-    echo "Temp: $color$temp°C"
+    echo "C $load / $color$temp°C"
 }
 
 function batt() {
     cap=$(cat /sys/class/power_supply/BAT0/capacity)
     status=$(cat /sys/class/power_supply/BAT0/status)
 
-    label="BAT"
+    label="B"
     if [[ "$status" != "Discharging" ]]; then
-        label="CHG"
+        label+="+"
+    else
+        label+="-"
     fi
 
     if [[ "$cap" -le "5" ]]; then
@@ -101,7 +95,7 @@ function batt() {
         color=""
     fi
 
-    echo "$label: $color$cap%"
+    echo "$label $color$cap%"
 }
 
 function curtime() {
@@ -109,7 +103,7 @@ function curtime() {
 }
 
 function draw() {
-    xsetroot -name "$(music) | $(bt) | $(wifi) | $(vol) | $(memusage) | $(cpuusage) | $(cputemp) | $(batt) | $(curtime)"
+    xsetroot -name "$(music) | $(wifi) | $(vol) | $(memusage) | $(cputemp) | $(batt) | $(curtime)"
 }
 
 trap draw SIGUSR1
