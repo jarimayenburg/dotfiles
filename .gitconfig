@@ -20,5 +20,3 @@
 # Include the work configuration for any Formelio repo
 [includeIf "gitdir:~/Repos/formelio/"]
     path = ~/.gitconfig.work
-[user]
-	signingkey = E128740DC697A381
