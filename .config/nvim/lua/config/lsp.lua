@@ -106,7 +106,7 @@ local servers = {
   },
   gopls = {},
   pyright = {},
-  tsserver = {},
+  ts_ls = {},
   intelephense = {},
 }
 

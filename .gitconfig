@@ -2,6 +2,7 @@
 	rebase = true
 [init]
 	defaultBranch = master
+
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [merge]
@@ -13,10 +14,7 @@
 [core]
 	autocrlf = input
 
-# Include the personal configuration by default
-[include]
-    path = ~/.gitconfig.personal
-
-# Include the work configuration for any Formelio repo
-[includeIf "gitdir:~/Repos/formelio/"]
-    path = ~/.gitconfig.work
+[user]
+	email = jari@maijenburg.dev
+	name = Jari Maijenburg
+	signingkey = 9CB8053C3CED4EE1

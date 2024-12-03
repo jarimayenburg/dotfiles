@@ -1,5 +1,6 @@
 alias r='ranger'
-alias xc='xclip -selection clipboard'
+alias xc='wl-copy'
+alias xp='wl-paste'
 
 # Git aliasses
 alias gs='git status'
