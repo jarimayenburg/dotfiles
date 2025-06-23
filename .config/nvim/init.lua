@@ -19,8 +19,6 @@ require('lazy').setup('plugins', {
   }
 })
 
-local opt = vim.opt
-
 -- Highlight every match, not just the first
 -- Automatic C program indenting
 -- Enable relative line numbers

@@ -28,6 +28,11 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local servers = {
+  gopls = {},
+  pyright = {},
+  ts_ls = {},
+  intelephense = {},
+  clangd = {},
   lua_ls = {
     settings = {
       Lua = {
@@ -104,10 +109,6 @@ local servers = {
       jdtls.start_or_attach(server)
     end,
   },
-  gopls = {},
-  pyright = {},
-  ts_ls = {},
-  intelephense = {},
 }
 
 local M = {}

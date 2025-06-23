@@ -1,0 +1,11 @@
+SHELL=/bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+HOME=/root
+LOGNAME=root
+
+# period  delay  job-id  command
+1  5   user.cron.daily    nice run-parts /root/.anacron/cron.daily
+
+7  10  user.cron.weekly   nice run-parts /root/.anacron/cron.weekly
+
+@monthly  5  user.cron.monthly  nice run-parts /root/.anacron/cron.monthly

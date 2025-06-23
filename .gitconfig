@@ -7,8 +7,8 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [merge]
 	tool = fugitive
-[commit]
-	gpgsign = true
+;[commit]
+;	gpgsign = true
 [push]
 	autoSetupRemote = true
 [core]
@@ -17,4 +17,7 @@
 [user]
 	email = jari@maijenburg.dev
 	name = Jari Maijenburg
-	signingkey = 9CB8053C3CED4EE1
+;	signingkey = A0F1F5D154B34C0F
+;
+; [includeIf "gitdir:~/Repos/medmij/"]
+;     path = .gitconfig.medmij

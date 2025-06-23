@@ -97,14 +97,6 @@ return {
   -- D2 UML support
   'terrastruct/d2-vim',
 
-  -- Inline UML rendering
-  {
-    'scrooloose/vim-slumlord',
-    dependencies = {
-      'aklt/plantuml-syntax'
-    }
-  },
-
   -- PlantUML support
   {
     'weirongxu/plantuml-previewer.vim',
@@ -114,14 +106,15 @@ return {
     }
   },
 
-  -- Surround selections
+  -- Markdown previews
   {
-    'kylechui/nvim-surround',
-    version = '*',
-    event = "VeryLazy",
-    config = function ()
-      require('nvim-surround').setup()
-    end
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
 
   'towolf/vim-helm',
@@ -139,4 +132,64 @@ return {
 
   -- nvim integration for bacon (background Rust code checker)
   'Canop/nvim-bacon',
+
+
+  -- Add/delete/edit surrounding pairs
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0",
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  },
+
+  -- Markdown previews
+  {
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+      local peek = require("peek")
+
+      peek.setup({
+        syntax = true,
+        app = 'browser',
+        filetype = { 'markdown', 'mermaid' }
+      })
+
+      vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+      vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+    end,
+  },
+
+  -- Go language support
+  {
+    "ray-x/go.nvim",
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      -- lsp_keymaps = false,
+      -- other options
+    },
+    config = function(lp, opts)
+      require("go").setup(opts)
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+          require('go.format').goimports()
+        end,
+        group = format_sync_grp,
+      })
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  },
 }

@@ -20,7 +20,8 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$PATH:$JAVA_HOME/bin"
 
 # Add Ruby gem bin directory to $PATH
-export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+export GEM_HOME="$(gem env user_gemhome)"
+export PATH="$PATH:$GEM_HOME/bin"
 
 # .NET Core
 export PATH="$PATH:$HOME/.dotnet/tools"
@@ -78,6 +79,8 @@ export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # Structurizr site generatr
 export PATH="$PATH:/opt/structurizr-site-generatr/bin"
+
+export TMS_CONFIG_FILE="$HOME/.dotfiles.git/.config/tms/config.toml"
 
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
