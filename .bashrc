@@ -27,3 +27,5 @@ source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
 source ~/.profile
+
+complete -C /usr/bin/packer packer
