@@ -50,8 +50,6 @@ export GOPATH="$HOME/.go"
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-export PATH="$PATH:$(yarn global bin)"
-
 # Add ~/.local/bin to PATH
 export PATH="$PATH:$HOME/.local/bin"
 
