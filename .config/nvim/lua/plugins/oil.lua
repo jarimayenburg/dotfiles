@@ -1,14 +1,17 @@
 return {
-  'stevearc/oil.nvim',
-  tag = "v2.8.0",
-  lazy = false,
-  dependencies = {
-    'nvim-tree/nvim-web-devicons'
-  },
-  keys = {
-    { '-', '<cmd>Oil<cr>' }
-  },
-  opts = {
-    default_file_explorer = true,
+  {
+    'stevearc/oil.nvim',
+    lazy = false,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    keys = {
+      { '-', '<cmd>Oil<cr>', desc = 'Open parent directory (oil)' },
+    },
+    opts = {
+      default_file_explorer = true,
+      columns = { 'icon', 'permissions', 'size' },
+      view_options = {
+        show_hidden = true,
+      },
+    },
   },
 }

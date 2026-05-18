@@ -1,47 +1,78 @@
 return {
-  -- LSP Configuration & Plugins
-  'neovim/nvim-lspconfig',
-  dependencies = {
-    -- Automatically install LSPs to stdpath for neovim
+  {
     'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-
-    -- Useful status updates for LSP
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim', opts = {} },
-
-    -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
-
-    'nvim-telescope/telescope.nvim',
-
-    -- Java language server (JDT.ls) extensions
-    'mfussenegger/nvim-jdtls',
-
-    -- Signature hints on functions, structs, etc.
-    { 'ray-x/lsp_signature.nvim', event = "VeryLazy" }
+    cmd = 'Mason',
+    opts = {
+      PATH = 'append',
+    },
   },
-  config = function()
-    require('neodev').setup()
-    require('mason').setup {
-      PATH = "append"
-    }
 
-    local mason_lspconfig = require 'mason-lspconfig'
+  {
+    'williamboman/mason-lspconfig.nvim',
+    dependencies = { 'williamboman/mason.nvim' },
+    config = function()
+      local servers = require('lsp.servers')
+      require('mason-lspconfig').setup({
+        ensure_installed = servers.ensure_installed,
+        automatic_enable = {
+          exclude = { 'jdtls' },
+        },
+      })
+    end,
+  },
 
-    local lsp_config = require('config.lsp')
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim',
+      'saghen/blink.cmp',
+    },
+    config = function()
+      local lsp_core = require('lsp')
+      local servers = require('lsp.servers')
 
-    mason_lspconfig.setup {
-      ensure_installed = lsp_config.servers,
-      handlers = {
-        lsp_config.setup_server,
-        -- jdtls is loaded through ftplugin instead
-        jdtls = function () end
-      }
-    }
+      vim.lsp.config('*', {
+        capabilities = lsp_core.get_capabilities(),
+      })
 
-    require('lsp_signature').setup({
+      for name, config in pairs(servers.servers) do
+        if next(config) ~= nil then
+          vim.lsp.config(name, config)
+        end
+      end
+    end,
+  },
+
+  {
+    'j-hui/fidget.nvim',
+    opts = {
+      notification = {
+        window = { winblend = 0 },
+      },
+    },
+  },
+
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        'lazy.nvim',
+      },
+    },
+  },
+
+  {
+    'ray-x/lsp_signature.nvim',
+    event = 'LspAttach',
+    opts = {
       toggle_key = '<C-s>',
-    })
-  end
+      toggle_key_flip_floatwin_setting = true,
+      hint_enable = false,
+      handler_opts = { border = 'rounded' },
+    },
+  },
+
+  { 'mfussenegger/nvim-jdtls', ft = 'java' },
 }

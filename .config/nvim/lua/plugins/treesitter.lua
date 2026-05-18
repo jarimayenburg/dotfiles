@@ -1,88 +1,69 @@
 return {
-  -- Highlight, edit, and navigate code
-  'nvim-treesitter/nvim-treesitter',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-  },
-  build = ':TSUpdate',
-  config = function()
-    vim.defer_fn(function()
-      require('nvim-treesitter.configs').setup {
-        -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'java', 'php', 'rust', 'tsx', 'javascript',
-          'typescript',
-          'vimdoc',
-          'vim' },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    config = function()
+      require('nvim-treesitter').install({
+        'c', 'cpp', 'go', 'lua', 'python', 'java', 'rust',
+        'tsx', 'javascript', 'typescript',
+        'vimdoc', 'vim',
+        'json', 'bash', 'xml', 'markdown', 'markdown_inline',
+      })
 
-        -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-        auto_install = true,
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('TreesitterHighlight', { clear = true }),
+        callback = function(ev)
+          pcall(vim.treesitter.start, ev.buf)
+        end,
+      })
 
-        highlight = { enable = true },
-        indent = { enable = true },
-        incremental_selection = {
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('TreesitterIndent', { clear = true }),
+        callback = function()
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+      require('nvim-treesitter-textobjects').setup({
+        select = {
           enable = true,
+          lookahead = true,
           keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            node_decremental = '<M-space>',
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
           },
         },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
           },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
+          goto_next_end = {
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
           },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>A'] = '@parameter.inner',
-            },
+          goto_previous_start = {
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
           },
         },
-      }
-    end, 0)
-
-    local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-    parser_configs.d2 = {
-      install_info = {
-        url = 'https://git.pleshevski.ru/pleshevskiy/tree-sitter-d2',
-        revision = 'main',
-        files = { 'src/parser.c', 'src/scanner.c' },
-      },
-      filetype = 'd2',
-    }
-  end
+        swap = {
+          enable = true,
+          swap_next     = { ['<leader>a'] = '@parameter.inner' },
+          swap_previous = { ['<leader>A'] = '@parameter.inner' },
+        },
+      })
+    end,
+  },
 }
