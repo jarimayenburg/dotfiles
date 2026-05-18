@@ -5,7 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'nvim-treesitter/nvim-treesitter',
-    { 'nvim-telescope/telescope-fzy-native.nvim', build = 'make' },
+    { 'nvim-telescope/telescope-fzy-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install' },
   },
   config = function()
     local telescope = require('telescope')
