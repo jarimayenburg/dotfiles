@@ -1,3 +1,5 @@
 # Some editor specific files I don't want to accidentally push
 .nvim.lua
 .bacon-locations
+
+**/.claude/settings.local.json

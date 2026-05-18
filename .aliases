@@ -60,3 +60,5 @@ alias hx='helix'
 alias screenfetch='neofetch'
 
 alias mutt='neomutt'
+
+alias ai='cd ~/Claude && claude --chrome'

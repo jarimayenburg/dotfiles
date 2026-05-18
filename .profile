@@ -82,6 +82,9 @@ export PATH="$PATH:/opt/structurizr-site-generatr/bin"
 
 export TMS_CONFIG_FILE="$HOME/.dotfiles.git/.config/tms/config.toml"
 
+# API key for JSearch. Used by Claude to search LinkedIn.
+export JSEARCH_API_KEY="fba91d9a4emshf6e2604319edf90p1f8e7bjsn17408d07fa62"
+
 # Start the X server if we're in a login shell
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     exec startx
