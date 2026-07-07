@@ -146,3 +146,5 @@ if [ -f '/opt/google-cloud-cli/completion.zsh.inc' ]; then . '/opt/google-cloud-
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/packer packer
+
+eval "$(direnv hook zsh)"
